@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import {RouterLink, RouterView} from 'vue-router'
 import Header from "@/components/Header.vue";
 </script>
 
@@ -15,10 +15,19 @@ import Header from "@/components/Header.vue";
       </nav>
     </div>
   </header>
-
-  <RouterView />
+  <div class="app">
+    <RouterView/>
+  </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/_colors.scss' as color;
 
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: color.$background1-element-color;
+}
 </style>
