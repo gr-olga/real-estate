@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {RouterLink, RouterView} from 'vue-router'
 import Header from "@/components/Header.vue";
+import Popup from "@/components/Popup.vue";
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import Header from "@/components/Header.vue";
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
+    <Popup/>
   </header>
   <div class="app">
     <RouterView/>

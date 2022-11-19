@@ -19,6 +19,9 @@ import Item from "@/components/Item.vue";
     </div>
     <div>
       <Item/>
+      <Item/>
+      <Item/>
+      <Item/>
     </div>
   </div>
 </template>
