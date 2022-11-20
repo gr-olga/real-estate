@@ -3,94 +3,110 @@
 </script>
 
 <template>
-  <div class="house-create">
-    <RouterLink to="/" class="house-create__back"> Back to overview*</RouterLink>
-    <h1 class="house-create__title">Create new listing</h1>
-    <form name="add-house" class="house-create__form">
-      <label class="house-create__label">
-        <span class="house-create__label-text">Street name*</span>
-        <input type="text" class="house-create__input -street" placeholder="Enter the street" required/>
-      </label>
-      <div class="house-create__box">
+  <div class="box">
+    <div class="house-create">
+      <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
+      <h1 class="house-create__title">Create new listing</h1>
+      <form name="add-house" class="house-create__form">
         <label class="house-create__label">
-          <span class="house-create__label-text">House number*</span>
-          <input type="text" class="house-create__input -house-number -double" placeholder="Enter house number"
-                 required/>
+          <span class="house-create__label-text">Street name*</span>
+          <input type="text" class="house-create__input -street" placeholder="Enter the street" required/>
+        </label>
+        <div class="house-create__box">
+          <label class="house-create__label">
+            <span class="house-create__label-text">House number*</span>
+            <input type="text" class="house-create__input -house-number -double" placeholder="Enter house number"
+                   required/>
+          </label>
+          <label class="house-create__label">
+            <span class="house-create__label-text">Addition</span>
+            <input type="text" class="house-create__input -addition -double" placeholder="e.g.A"/>
+          </label>
+        </div>
+        <label class="house-create__label">
+          <span class="house-create__label-text">Postal code*</span>
+          <input type="text" class="house-create__input -postal-code" placeholder="e.g. 1000 AA" required/>
         </label>
         <label class="house-create__label">
-          <span class="house-create__label-text">Addition</span>
-          <input type="text" class="house-create__input -addition -double" placeholder="e.g.A"/>
+          <span class="house-create__label-text">City*</span>
+          <input type="text" class="house-create__input -city" placeholder="e.g. Utrecht" required/>
         </label>
-      </div>
-      <label class="house-create__label">
-        <span class="house-create__label-text">Postal code*</span>
-        <input type="text" class="house-create__input -postal-code" placeholder="e.g. 1000 AA" required/>
-      </label>
-      <label class="house-create__label">
-        <span class="house-create__label-text">City*</span>
-        <input type="text" class="house-create__input -city" placeholder="e.g. Utrecht" required/>
-      </label>
-      <label class="house-create__label">
-        <span class="house-create__label-text">Upload picture(PNG or JPG)*</span>
-        <input type="file" class="house-create__input -image" alt="house" required/>
-        <img src="#" alt="image">
-      </label>
+        <label class="house-create__label">
+          <span class="house-create__label-text">Upload picture(PNG or JPG)*</span>
+          <input type="file" class="house-create__input -image" alt="house" required/>
+          <img src="#" alt="image">
+        </label>
 
-      <label class="house-create__label">
-        <span class="house-create__label-text">Price*</span>
-        <input type="number" class="house-create__input -price" placeholder="e.g. $150.000" required/>
-      </label>
-      <div class="house-create__box">
         <label class="house-create__label">
-          <span class="house-create__label-text">Size*</span>
-          <input type="number" class="house-create__input -size -double" placeholder="e.g. 60m2" required/>
+          <span class="house-create__label-text">Price*</span>
+          <input type="number" class="house-create__input -price" placeholder="e.g. $150.000" required/>
+        </label>
+        <div class="house-create__box">
+          <label class="house-create__label">
+            <span class="house-create__label-text">Size*</span>
+            <input type="number" class="house-create__input -size -double" placeholder="e.g. 60m2" required/>
+          </label>
+          <label class="house-create__label">
+            <span class="house-create__label-text">Garage*</span>
+            <select class="house-create__input -garage -double" required>
+              <option class="house-create__input" value="">Select</option>
+              <option class="house-create__input" value="Option 1">yes</option>
+              <option class="house-create__input" value="Option 1">no</option>
+            </select>
+          </label>
+        </div>
+        <div class="house-create__box">
+          <label class="house-create__label">
+            <span class="house-create__label-text">Bedrooms*</span>
+            <input type="number" class="house-create__input -bedrooms -double" placeholder="enter amount" required/>
+          </label>
+          <label class="house-create__label">
+            <span class="house-create__label-text">Bathrooms*</span>
+            <input type="number" class="house-create__input -size -double" placeholder="enter amount" required/>
+          </label>
+        </div>
+        <label class="house-create__label">
+          <span class="house-create__label-text">Construction date*</span>
+          <input type="number" class="house-create__input -construction-date" placeholder="e.g. 1990" required/>
         </label>
         <label class="house-create__label">
-          <span class="house-create__label-text">Garage*</span>
-          <select class="house-create__input -garage -double" required>
-            <option value="">Select</option>
-            <option value="Option 1">yes</option>
-            <option value="Option 1">no</option>
-          </select>
+          <span class="house-create__label-text">Description*</span>
+          <input type="text" class="house-create__input -description" placeholder="Enter description" required/>
         </label>
-      </div>
-      <div class="house-create__box">
-        <label class="house-create__label">
-          <span class="house-create__label-text">Bedrooms*</span>
-          <input type="number" class="house-create__input -bedrooms -double" placeholder="enter amount" required/>
-        </label>
-        <label class="house-create__label">
-          <span class="house-create__label-text">Bathrooms*</span>
-          <input type="number" class="house-create__input -size -double" placeholder="enter amount" required/>
-        </label>
-      </div>
-      <label class="house-create__label">
-        <span class="house-create__label-text">Construction date*</span>
-        <input type="number" class="house-create__input -construction-date" placeholder="e.g. 1990" required/>
-      </label>
-      <label class="house-create__label">
-        <span class="house-create__label-text">Description*</span>
-        <input type="text" class="house-create__input -description" placeholder="Enter description" required/>
-      </label>
-      <button>Post</button>
-    </form>
-
+        <button>Post</button>
+      </form>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @use '@/assets/_colors.scss' as color;
 
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+}
+
 .house-create {
   display: flex;
   flex-direction: column;
   background-image: url("@/assets/images/img_background@3x.png");
   max-width: 100%;
-  align-items: flex-start;
+  align-self: flex-start;
+  &__back{
+    font-size: 18px;
+    color: #4A4B4C;
+    margin-top: 20px;
+    text-decoration: none;
+  }
 
   &__title {
     font-size: 18px;
     font-weight: bold;
+    margin-top: 20px;
   }
 
   &__form {
@@ -99,6 +115,7 @@
     justify-content: flex-start;
     align-items: center;
     max-width: 400px;
+    margin-top: 20px;
   }
 
   &__label {
@@ -134,7 +151,7 @@
 
   .-double {
     min-width: 150px;
-    padding: 20px 0;
+    padding: 15px 2px;
   }
 
 

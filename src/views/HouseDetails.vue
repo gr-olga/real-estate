@@ -5,7 +5,7 @@ import Item from "@/components/Item.vue";
 
 <template>
   <div class="house-details">
-    <RouterLink to="/">Back to overview</RouterLink>
+    <RouterLink to="/" class="house-details__back"> ← Back to overview</RouterLink>
     <div class="house-details__all">
       <div class="house-details__item">
         <img class="house-details__item-image" src="@/assets/images/img_placeholder_house@3x.png" alt="house">
@@ -76,6 +76,14 @@ import Item from "@/components/Item.vue";
 .house-details {
   display: flex;
   flex-direction: column;
+
+  &__back {
+    font-size: 18px;
+    color: #4A4B4C;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
 
   &__all {
     display: flex;
@@ -153,7 +161,8 @@ import Item from "@/components/Item.vue";
     margin-left: 70px;
     max-width: 400px;
   }
-  &__list-title{
+
+  &__list-title {
     font-size: 18px;
     font-weight: bold;
   }
