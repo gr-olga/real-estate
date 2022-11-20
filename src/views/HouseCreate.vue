@@ -1,7 +1,9 @@
 <script setup lang="ts">
 
 import {HouseType} from "@/models/HouseType";
-import {reactive, ref} from "vue";
+import {reactive, Ref, ref} from "vue";
+import type {NewHouseType} from "@/models/NewHouseType";
+import {addHouseImage, createHouse} from "@/services/HouseService";
 
 interface OverviewState {
   houses: ReadonlyArray<HouseType>
@@ -11,31 +13,57 @@ const state: OverviewState = reactive({
   houses: [],
 })
 
-const form = ref({
-  price: "",
-  bedrooms: "",
-  bathrooms: "",
-  size: "",
+const form: Ref<NewHouseType> = ref({
+  price: 0,
+  bedrooms: 0,
+  bathrooms: 0,
+  size: 0,
   streetName: "",
   houseNumber: "",
   numberAddition: "",
   zip: "",
   city: "",
-  constructionYear: "",
-  hasGarage: "",
+  constructionYear: 1600,
+  hasGarage: false,
   description: ""
 })
 
- function handleSubmit() {
-  console.log(form)
+//todo debug
+function demo(): void {
+  form.value = {
+    price: 20,
+    bedrooms: 1,
+    bathrooms: 1,
+    size: 1,
+    streetName: 'Overtoom',
+    houseNumber: '21',
+    numberAddition: '1',
+    zip: '1181TY',
+    city: 'Amsterdam',
+    constructionYear: 1960,
+    hasGarage: false,
+    description: 'Nice house!'
+  }
 }
 
+let image = ref(null as any)
 
+function onAddFile($event: Event): void {
+  image.value = ($event.target as any).files[0];
+}
+
+async function handleSubmit(): Promise<void> {
+  const {data} = await createHouse(form.value)
+  await addHouseImage(data.id, image.value);
+}
 </script>
 
 <template>
   <div class="box">
     <div class="house-create">
+      <!--      //todo debug-->
+      <button type="button" @click="demo">demo</button>
+      <!--      //todo debug-->
       <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
       <h1 class="house-create__title">Create new listing</h1>
       <form name="add-house" class="house-create__form" @submit.prevent="handleSubmit">
@@ -61,6 +89,7 @@ const form = ref({
             <span class="house-create__label-text">Addition</span>
             <input type="text"
                    class="house-create__input -addition -double"
+                   v-model="form.numberAddition"
                    placeholder="e.g.A"/>
           </label>
         </div>
@@ -85,8 +114,9 @@ const form = ref({
           <input type="file"
                  class="house-create__input -image"
                  alt="house"
+                 @change="onAddFile"
                  required/>
-          <img src="#" alt="image">
+          <img v-if="image" :src="image" alt="Uploaded House image"/>
         </label>
 
         <label class="house-create__label">
@@ -95,6 +125,7 @@ const form = ref({
                  class="house-create__input -price"
                  placeholder="e.g. $150.000"
                  v-model="form.price"
+                 min="0"
                  required/>
         </label>
         <div class="house-create__box">
@@ -112,8 +143,8 @@ const form = ref({
                     v-model="form.hasGarage"
                     required>
               <option class="house-create__input" value="">Select</option>
-              <option class="house-create__input" value="Option 1">yes</option>
-              <option class="house-create__input" value="Option 1">no</option>
+              <option class="house-create__input" :value="true">yes</option>
+              <option class="house-create__input" :value="false">no</option>
             </select>
           </label>
         </div>
@@ -124,14 +155,16 @@ const form = ref({
                    class="house-create__input -bedrooms -double"
                    v-model="form.bedrooms"
                    placeholder="enter amount"
+                   min="0"
                    required/>
           </label>
           <label class="house-create__label">
             <span class="house-create__label-text">Bathrooms*</span>
             <input type="number"
                    class="house-create__input -bathroom -double"
-                   v-model="form.bathroom"
+                   v-model="form.bathrooms"
                    placeholder="enter amount"
+                   min="0"
                    required/>
           </label>
         </div>
@@ -141,6 +174,7 @@ const form = ref({
                  class="house-create__input -construction-date"
                  v-model="form.constructionYear"
                  placeholder="e.g. 1990"
+                 min="1600"
                  required/>
         </label>
         <label class="house-create__label">
