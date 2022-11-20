@@ -7,11 +7,11 @@ import type {HouseType} from "@/models/HouseType";
 let input = ref("");
 
 interface OverviewState {
-   houses: ReadonlyArray<HouseType>
+  houses: ReadonlyArray<HouseType>
 }
 
 const state: OverviewState = reactive({
-  houses: []
+  houses: [],
 })
 
 getHouses().then((res) => {
@@ -20,16 +20,10 @@ getHouses().then((res) => {
   console.error('Error fetching Houses');
 })
 
-// const sortByAlphabet = [...houses].sort((a, b) => parseInt(a.size) (parseInt(b.size)))
 
-// function sortedList() {
-//   return houses.filter((house) => {
-//         house.filter((item) => {
-//           item.include(input.value)
-//         })
-//       }
-//   );
-// }
+function sortHouses(houses: ReadonlyArray<HouseType>, option: 'size' | 'price'): void {
+  state.houses = [...houses].sort((a: HouseType, b: HouseType) => a[option] - b[option])
+}
 </script>
 
 <template>
@@ -42,12 +36,12 @@ getHouses().then((res) => {
       <input class="overview__search" type="search" placeholder="Search for a house" v-model="input"/>
       <!--      <img class="overview__search-img" src="@/assets/images/ic_search@3x.png" alt="search">-->
       <div class="overview__sort">
-        <button class="overview__sort-btn">Prise</button>
-        <button class="overview__sort-btn">Size</button>
+        <button class="overview__sort-btn" @click="sortHouses(state.houses, 'price')">Prise</button>
+        <button class="overview__sort-btn" @click="sortHouses(state.houses, 'size')">Size</button>
       </div>
     </div>
     <div class="overview__items-box">
-      <Item v-for="house in state.houses" :house="house" />
+      <Item v-for="house in state.houses" :house="house"/>
     </div>
   </div>
 </template>
