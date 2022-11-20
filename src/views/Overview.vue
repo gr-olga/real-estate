@@ -1,6 +1,35 @@
 <script setup lang="ts">
-
 import Item from "@/components/Item.vue";
+import {reactive, ref} from "vue";
+import {getHouses} from "@/services/HouseService";
+import type {HouseType} from "@/models/HouseType";
+
+let input = ref("");
+
+interface OverviewState {
+   houses: ReadonlyArray<HouseType>
+}
+
+const state: OverviewState = reactive({
+  houses: []
+})
+
+getHouses().then((res) => {
+  state.houses = res.data;
+}).catch((e) => {
+  console.error('Error fetching Houses');
+})
+
+// const sortByAlphabet = [...houses].sort((a, b) => parseInt(a.size) (parseInt(b.size)))
+
+// function sortedList() {
+//   return houses.filter((house) => {
+//         house.filter((item) => {
+//           item.include(input.value)
+//         })
+//       }
+//   );
+// }
 </script>
 
 <template>
@@ -10,18 +39,15 @@ import Item from "@/components/Item.vue";
       <button class="overview__create-btn"> + Create new</button>
     </div>
     <div class="overview__line">
-      <input class="overview__search"/>
-      <img class="overview__search-img" src="@/assets/images/ic_search@3x.png" alt="search">
+      <input class="overview__search" type="search" placeholder="Search for a house" v-model="input"/>
+      <!--      <img class="overview__search-img" src="@/assets/images/ic_search@3x.png" alt="search">-->
       <div class="overview__sort">
         <button class="overview__sort-btn">Prise</button>
         <button class="overview__sort-btn">Size</button>
       </div>
     </div>
     <div class="overview__items-box">
-      <Item/>
-      <Item/>
-      <Item/>
-      <Item/>
+      <Item v-for="house in state.houses" :house="house" />
     </div>
   </div>
 </template>
@@ -74,11 +100,12 @@ import Item from "@/components/Item.vue";
   }
 
   &__search {
-    background-color: color.$tertiary-element-color2;
+    background-color: color.$tertiary-element-color1;
     border-radius: 5px;
-    border: #C3C3C3 1px solid;
+    border: color.$tertiary-element-color1 1px solid;
     max-width: 550px;
     min-width: 300px;
+    padding: 10px;
   }
 
   &__serch-img {
@@ -86,9 +113,9 @@ import Item from "@/components/Item.vue";
     max-height: 20px;
     margin-left: -300px;
   }
-  &__items-box{
+
+  &__items-box {
     width: 100%;
   }
 }
-
 </style>

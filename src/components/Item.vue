@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import type {HouseType} from "@/models/HouseType";
+
+defineProps<{
+  house: HouseType
+}>()
+
 
 </script>
 
@@ -7,9 +13,9 @@
     <div class="item__details">
       <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
       <div class="item__details-info">
-        <h3 class="item__details-address">Street</h3>
-        <div class="item__details-prize">$ 500.000</div>
-        <h5 class="item__details-text">1101 Amsterdam</h5>
+        <h3 class="item__details-address">{{ house.location.street }}</h3>
+        <div class="item__details-prize">€ {{ house.price }}</div>
+        <h5 class="item__details-text">{{ house.location.zip }}</h5>
         <div class="item__details-box">
           <img class="item__details-icon" src="@/assets/images/ic_bed@3x.png" alt="bed">
           <h5>1</h5>
