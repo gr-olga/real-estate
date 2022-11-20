@@ -64,6 +64,7 @@ import Item from "@/components/Item.vue";
       </div>
 
       <div class="house-details__list">
+        <h3 class="house-details__list-title">Recommended for you</h3>
         <Item/>
       </div>
     </div>
@@ -144,6 +145,17 @@ import Item from "@/components/Item.vue";
   .item__action-icon {
     width: 20px;
     height: 20px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
+    max-width: 400px;
+  }
+  &__list-title{
+    font-size: 18px;
+    font-weight: bold;
   }
 }
 

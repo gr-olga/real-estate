@@ -17,7 +17,7 @@ import Item from "@/components/Item.vue";
         <button class="overview__sort-btn">Size</button>
       </div>
     </div>
-    <div>
+    <div class="overview__items-box">
       <Item/>
       <Item/>
       <Item/>
@@ -85,6 +85,9 @@ import Item from "@/components/Item.vue";
     max-width: 20px;
     max-height: 20px;
     margin-left: -300px;
+  }
+  &__items-box{
+    width: 100%;
   }
 }
 
