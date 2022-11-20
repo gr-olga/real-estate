@@ -18,11 +18,11 @@ defineProps<{
         <h5 class="item__details-text">{{ house.location.zip }}</h5>
         <div class="item__details-box">
           <img class="item__details-icon" src="@/assets/images/ic_bed@3x.png" alt="bed">
-          <h5>1</h5>
+          <h5>{{house.rooms.bedrooms}}</h5>
           <img class="item__details-icon" src="@/assets/images/ic_bath@3x.png" alt="bed">
-          <h5>3</h5>
+          <h5>{{house.rooms.bathrooms}}</h5>
           <img class="item__details-icon" src="@/assets/images/ic_size@3x.png" alt="bed">
-          <h5>120m2</h5>
+          <h5>{{house.size}}</h5>
         </div>
       </div>
     </div>
