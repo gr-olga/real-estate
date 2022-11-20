@@ -15,7 +15,7 @@ import Popup from "@/components/Popup.vue";
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
-    <Popup/>
+<!--    <Popup/>-->
   </header>
   <div class="app">
     <RouterView/>
