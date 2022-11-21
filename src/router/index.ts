@@ -19,7 +19,7 @@ const router = createRouter({
       component: () => import('../views/About.vue')
     } ,
     {
-      path: '/edit',
+      path: '/edit/:houseId',
       name: 'edit',
       component: () => import('../views/HouseDetailsEdit.vue')
     } ,

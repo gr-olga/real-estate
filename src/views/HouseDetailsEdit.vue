@@ -1,18 +1,22 @@
 <script setup lang="ts">
-
 import {HouseType} from "@/models/HouseType";
-import {reactive, Ref, ref} from "vue";
+import {onMounted, reactive, Ref, ref} from "vue";
 import type {NewHouseType} from "@/models/NewHouseType";
 import {addHouseImage, editHouse} from "@/services/HouseService";
+import {store} from "@/store";
+import {useRoute} from 'vue-router'
 
-interface OverviewState {
-  houses: ReadonlyArray<HouseType>
+const route = useRoute();
+
+interface EditState {
+  house: HouseType | undefined
 }
 
-const state: OverviewState = reactive({
-  houses: [],
+const state: EditState = reactive({
+  house: undefined
 })
-const form: Ref<NewHouseType> = ref({
+
+let form: Ref<NewHouseType> = ref({
   price: 0,
   bedrooms: 0,
   bathrooms: 0,
@@ -27,7 +31,16 @@ const form: Ref<NewHouseType> = ref({
   description: ""
 })
 
+onMounted(() => {
+  state.house = store.state.houses.find((house) => String(house.id) === String(route.params.houseId))
 
+  if (state.house) {
+    form.value = {
+      ...form.value,
+      price: state.house.price
+    }
+  }
+});
 let image = ref(null as any)
 
 function onAddFile($event: Event): void {
@@ -35,7 +48,7 @@ function onAddFile($event: Event): void {
 }
 
 async function handleSubmit(): Promise<void> {
-  const {data} = await editHouse(form.value)
+  const {data} = await editHouse(route.params.houseId as any, form.value)
   await addHouseImage(data.id, image.value);
 }
 </script>

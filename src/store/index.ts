@@ -5,7 +5,6 @@ interface StateType {
     houses: ReadonlyArray<HouseType>
 }
 
-//todo not sure if I really need vuex
 export const store = createStore({
     state(): StateType {
         return {
@@ -14,7 +13,6 @@ export const store = createStore({
     },
     mutations: {
         setHouses(state, houses) {
-            console.log(111, houses);
             state.houses = [...houses];
         },
         setHouse(state, house) {

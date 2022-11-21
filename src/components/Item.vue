@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import type {HouseType} from "@/models/HouseType";
+import router from "@/router";
 
 defineProps<{
   house: HouseType
 }>()
 
-
+function goToEdit(id: string): void {
+  router.push(`/edit/${id}`)
+}
 </script>
 
 <template>
   <div class="item">
     <div class="item__details">
-       <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
+      <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
       <div class="item__details-info">
         <h3 class="item__details-address">{{ house.location.street }}</h3>
         <div class="item__details-prize">€ {{ house.price }}</div>
@@ -27,7 +30,7 @@ defineProps<{
       </div>
     </div>
     <div class="item__actions">
-      <button class="item__action -edit" type="button">
+      <button @click="goToEdit(house.id)" class="item__action -edit" type="button">
         <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
       </button>
       <button class="item__action -remove" type="button">
