@@ -38,8 +38,8 @@ function goToEdit(id: string): void {
       <div class="house-details__item">
         <img class="house-details__item-image" src="@/assets/images/img_placeholder_house@3x.png" alt="house">
         <div class="house-details__info">
-          <div class="house-details__address-line">e
-            <h1 class="house-details__address-title">Address</h1>
+          <div class="house-details__address-line">
+            <h1 class="house-details__address-title">{{ state.house.location.street }}</h1>
             <div class="item__actions">
               <RouterLink to="/edit">
                 <button class="item__action -edit" type="button" @click="goToEdit(state.house.id)">
@@ -53,7 +53,7 @@ function goToEdit(id: string): void {
           </div>
           <div class="house-details__block">
             <img class="house-details__icon" src="@/assets/images/ic_location@3x.png" alt="location">
-            <h5 class="house-details__block-text">zip</h5>
+            <h5 class="house-details__block-text">{{  state.house.location.zip }}</h5>
           </div>
           <div class="house-details__block">
             <div class="house-details__block">

@@ -5,6 +5,7 @@ import type {NewHouseType} from "@/models/NewHouseType";
 import {addHouseImage, editHouse} from "@/services/HouseService";
 import {store} from "@/store";
 import {useRoute} from 'vue-router'
+import router from "@/router";
 
 const route = useRoute();
 
@@ -33,7 +34,6 @@ let form: Ref<NewHouseType> = ref({
 
 onMounted(() => {
   state.house = store.state.houses.find((house) => String(house.id) === String(route.params.houseId))
-
   if (state.house) {
     form.value = {
       ...form.value,
@@ -63,136 +63,139 @@ function onAddFile($event: Event): void {
 async function handleSubmit(): Promise<void> {
   const {data} = await editHouse(route.params.houseId as any, form.value)
   await addHouseImage(data.id, image.value);
+  await router.push(`/house-details/${data.id}`)
 }
 
 </script>
 
 <template>
-  <div class="box">
-    <div class="house-create">
-      <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
-      <h1 class="house-create__title">Create new listing</h1>
-      <form name="add-house" class="house-create__form" @submit.prevent="handleSubmit">
-        <label class="house-create__label">
-          <span class="house-create__label-text">Street name*</span>
-          <input
-              type="text"
-              class="house-create__input -street"
-              v-model="form.streetName"
-              placeholder="Enter the street"
-              required/>
-        </label>
-        <div class="house-create__box">
+  <div class="background">
+    <div class="box">
+      <div class="house-create">
+        <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
+        <h1 class="house-create__title">Edit listing</h1>
+        <form name="add-house" class="house-create__form" @submit.prevent="handleSubmit">
           <label class="house-create__label">
-            <span class="house-create__label-text">House number*</span>
+            <span class="house-create__label-text">Street name*</span>
+            <input
+                type="text"
+                class="house-create__input -street"
+                v-model="form.streetName"
+                placeholder="Enter the street"
+                required/>
+          </label>
+          <div class="house-create__box">
+            <label class="house-create__label">
+              <span class="house-create__label-text">House number*</span>
+              <input type="text"
+                     class="house-create__input -house-number -double"
+                     v-model="form.houseNumber"
+                     placeholder="Enter house number"
+                     required/>
+            </label>
+            <label class="house-create__label">
+              <span class="house-create__label-text">Addition</span>
+              <input type="text"
+                     class="house-create__input -addition -double"
+                     v-model="form.numberAddition"
+                     placeholder="e.g.A"/>
+            </label>
+          </div>
+          <label class="house-create__label">
+            <span class="house-create__label-text">Postal code*</span>
             <input type="text"
-                   class="house-create__input -house-number -double"
-                   v-model="form.houseNumber"
-                   placeholder="Enter house number"
+                   class="house-create__input -postal-code"
+                   v-model="form.zip"
+                   placeholder="e.g. 1000 AA"
                    required/>
           </label>
           <label class="house-create__label">
-            <span class="house-create__label-text">Addition</span>
+            <span class="house-create__label-text">City*</span>
             <input type="text"
-                   class="house-create__input -addition -double"
-                   v-model="form.numberAddition"
-                   placeholder="e.g.A"/>
+                   class="house-create__input -city"
+                   v-model="form.city"
+                   placeholder="e.g. Utrecht"
+                   required/>
           </label>
-        </div>
-        <label class="house-create__label">
-          <span class="house-create__label-text">Postal code*</span>
-          <input type="text"
-                 class="house-create__input -postal-code"
-                 v-model="form.zip"
-                 placeholder="e.g. 1000 AA"
-                 required/>
-        </label>
-        <label class="house-create__label">
-          <span class="house-create__label-text">City*</span>
-          <input type="text"
-                 class="house-create__input -city"
-                 v-model="form.city"
-                 placeholder="e.g. Utrecht"
-                 required/>
-        </label>
-        <label class="house-create__label">
-          <span class="house-create__label-text">Upload picture(PNG or JPG)*</span>
-          <input type="file"
-                 class="house-create__input -image"
-                 alt="house"
-                 @change="onAddFile"
-                 required/>
-          <img v-if="image" :src="image" alt="Uploaded House image"/>
-        </label>
+          <label class="house-create__label">
+            <span class="house-create__label-text">Upload picture(PNG or JPG)*</span>
+            <input type="file"
+                   class="house-create__input -image"
+                   alt="house"
+                   @change="onAddFile"
+                   required/>
+            <img v-if="image" :src="image" alt="Uploaded House image"/>
+          </label>
 
-        <label class="house-create__label">
-          <span class="house-create__label-text">Price*</span>
-          <input type="number"
-                 class="house-create__input -price"
-                 placeholder="e.g. $150.000"
-                 v-model="form.price"
-                 min="0"
-                 required/>
-        </label>
-        <div class="house-create__box">
           <label class="house-create__label">
-            <span class="house-create__label-text">Size*</span>
+            <span class="house-create__label-text">Price*</span>
             <input type="number"
-                   class="house-create__input -size -double"
-                   placeholder="e.g. 60m2"
-                   v-model="form.size"
-                   required/>
-          </label>
-          <label class="house-create__label">
-            <span class="house-create__label-text">Garage*</span>
-            <select class="house-create__input -garage -double"
-                    v-model="form.hasGarage"
-                    required>
-              <option class="house-create__input" value="">Select</option>
-              <option class="house-create__input" :value="true">yes</option>
-              <option class="house-create__input" :value="false">no</option>
-            </select>
-          </label>
-        </div>
-        <div class="house-create__box">
-          <label class="house-create__label">
-            <span class="house-create__label-text">Bedrooms*</span>
-            <input type="number"
-                   class="house-create__input -bedrooms -double"
-                   v-model="form.bedrooms"
-                   placeholder="enter amount"
+                   class="house-create__input -price"
+                   placeholder="e.g. $150.000"
+                   v-model="form.price"
                    min="0"
                    required/>
           </label>
+          <div class="house-create__box">
+            <label class="house-create__label">
+              <span class="house-create__label-text">Size*</span>
+              <input type="number"
+                     class="house-create__input -size -double"
+                     placeholder="e.g. 60m2"
+                     v-model="form.size"
+                     required/>
+            </label>
+            <label class="house-create__label">
+              <span class="house-create__label-text">Garage*</span>
+              <select class="house-create__input -garage -double"
+                      v-model="form.hasGarage"
+                      required>
+                <option class="house-create__input" value="">Select</option>
+                <option class="house-create__input" :value="true">yes</option>
+                <option class="house-create__input" :value="false">no</option>
+              </select>
+            </label>
+          </div>
+          <div class="house-create__box">
+            <label class="house-create__label">
+              <span class="house-create__label-text">Bedrooms*</span>
+              <input type="number"
+                     class="house-create__input -bedrooms -double"
+                     v-model="form.bedrooms"
+                     placeholder="enter amount"
+                     min="0"
+                     required/>
+            </label>
+            <label class="house-create__label">
+              <span class="house-create__label-text">Bathrooms*</span>
+              <input type="number"
+                     class="house-create__input -bathroom -double"
+                     v-model="form.bathrooms"
+                     placeholder="enter amount"
+                     min="0"
+                     required/>
+            </label>
+          </div>
           <label class="house-create__label">
-            <span class="house-create__label-text">Bathrooms*</span>
+            <span class="house-create__label-text">Construction date*</span>
             <input type="number"
-                   class="house-create__input -bathroom -double"
-                   v-model="form.bathrooms"
-                   placeholder="enter amount"
-                   min="0"
+                   class="house-create__input -construction-date"
+                   v-model="form.constructionYear"
+                   placeholder="e.g. 1990"
+                   min="1600"
                    required/>
           </label>
-        </div>
-        <label class="house-create__label">
-          <span class="house-create__label-text">Construction date*</span>
-          <input type="number"
-                 class="house-create__input -construction-date"
-                 v-model="form.constructionYear"
-                 placeholder="e.g. 1990"
-                 min="1600"
-                 required/>
-        </label>
-        <label class="house-create__label">
-          <span class="house-create__label-text">Description*</span>
-          <input type="text"
-                 class="house-create__input -description"
-                 v-model="form.description"
-                 placeholder="Enter description"
-                 required/>
-        </label>
-        <button class="house-create__post" type="submit">Save</button>
-      </form>
+          <label class="house-create__label">
+            <span class="house-create__label-text">Description*</span>
+            <input type="text"
+                   class="house-create__input -description"
+                   v-model="form.description"
+                   placeholder="Enter description"
+                   required/>
+          </label>
+          <button class="house-create__post" type="submit">Save</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -200,18 +203,30 @@ async function handleSubmit(): Promise<void> {
 <style scoped lang="scss">
 @use '@/assets/_colors.scss' as color;
 
+.background {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-size: 100vw;
+  background-image: url("@/assets/images/img_background@3x.png");
+  padding-bottom: 40px;
+}
+
 .box {
   display: flex;
   flex-direction: column;
   width: 80%;
   justify-content: center;
   align-items: center;
+
 }
 
 .house-create {
   display: flex;
   flex-direction: column;
-  background-image: url("@/assets/images/img_background@3x.png");
+  //background-image: url("@/assets/images/img_background@3x.png");
   max-width: 100%;
   align-self: flex-start;
 
