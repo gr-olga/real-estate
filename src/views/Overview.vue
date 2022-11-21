@@ -3,6 +3,7 @@ import Item from "@/components/Item.vue";
 import {reactive, ref} from "vue";
 import {getHouses} from "@/services/HouseService";
 import type {HouseType} from "@/models/HouseType";
+import {store} from "@/store";
 
 let input = ref("");
 
@@ -16,21 +17,43 @@ const state: OverviewState = reactive({
 
 getHouses().then((res) => {
   state.houses = res.data;
+  store.commit('setHouses', res.data)
 }).catch((e) => {
   console.error('Error fetching Houses');
 })
 
-
 function sortHouses(houses: ReadonlyArray<HouseType>, option: 'size' | 'price'): void {
   state.houses = [...houses].sort((a: HouseType, b: HouseType) => a[option] - b[option])
 }
+
+// function filteredList() {
+// let search = ref(input)
+//  return state.houses.filter(house => {
+//      Array.prototype.filter.call(house, (x) => x <= "b")
+//     })
+//  let search = ref(input)
+//  state.houses.filter(house =>{
+//       let newArray = [];
+//       const serach = input.value.toLowerCase();
+//       for (key in obj) {
+//         el = house[key]
+//         if (el.name.toLowerCase().indexOf(serach) != -1) newArray.push(el);
+//       }
+//       return newArray;
+//     })
+//
+// }
+
+
 </script>
 
 <template>
   <div class="overview">
     <div class="overview__line">
       <h1 class="overview__title">Houses</h1>
-      <button class="overview__create-btn"> + Create new</button>
+      <RouterLink to="/house-create" class="overview__create-btn">
+        <button class="overview__create-btn"> + Create new</button>
+      </RouterLink>
     </div>
     <div class="overview__line">
       <input class="overview__search" type="search" placeholder="Search for a house" v-model="input"/>
@@ -74,23 +97,25 @@ function sortHouses(houses: ReadonlyArray<HouseType>, option: 'size' | 'price'):
     border: #EB5440 1px solid;
     border-radius: 5px;
     max-width: 350px;
-    min-width: 200px;
+    min-width: 100px;
     font-size: 18px;
     font-weight: bold;
     color: white;
-
+    padding: 7px;
+    cursor: pointer;
   }
 
   &__sort-btn {
     background-color: color.$primary-element-color;
     border: #EB5440 1px solid;
     border-radius: 5px;
-    max-width: 250px;
+    max-width: 450px;
     min-width: 100px;
     font-size: 12px;
     font-weight: bold;
     color: white;
     padding: 10px;
+    cursor: pointer;
   }
 
   &__search {

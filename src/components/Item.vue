@@ -11,18 +11,18 @@ defineProps<{
 <template>
   <div class="item">
     <div class="item__details">
-      <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
+       <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
       <div class="item__details-info">
         <h3 class="item__details-address">{{ house.location.street }}</h3>
         <div class="item__details-prize">€ {{ house.price }}</div>
         <h5 class="item__details-text">{{ house.location.zip }}</h5>
         <div class="item__details-box">
           <img class="item__details-icon" src="@/assets/images/ic_bed@3x.png" alt="bed">
-          <h5>{{house.rooms.bedrooms}}</h5>
+          <h5>{{ house.rooms.bedrooms }}</h5>
           <img class="item__details-icon" src="@/assets/images/ic_bath@3x.png" alt="bed">
-          <h5>{{house.rooms.bathrooms}}</h5>
+          <h5>{{ house.rooms.bathrooms }}</h5>
           <img class="item__details-icon" src="@/assets/images/ic_size@3x.png" alt="bed">
-          <h5>{{house.size}}</h5>
+          <h5>{{ house.size }}</h5>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@ defineProps<{
   }
 
   &__details-address {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: bold;
   }
 

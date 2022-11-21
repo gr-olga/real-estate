@@ -1,6 +1,22 @@
 <script setup lang="ts">
-
 import Item from "@/components/Item.vue";
+import {HouseType} from "@/models/HouseType";
+import {reactive} from "vue";
+import {getHouses} from "@/services/HouseService";
+
+interface OverviewState {
+  houses: ReadonlyArray<HouseType>
+}
+
+const state: OverviewState = reactive({
+  houses: [],
+})
+
+getHouses().then((res) => {
+  state.houses = res.data;
+}).catch((e) => {
+  console.error('Error fetching Houses');
+})
 </script>
 
 <template>
@@ -13,9 +29,11 @@ import Item from "@/components/Item.vue";
           <div class="house-details__address-line">
             <h1 class="house-details__address-title">Address</h1>
             <div class="item__actions">
-              <button class="item__action -edit" type="button">
-                <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
-              </button>
+              <RouterLink to="/edit">
+                <button class="item__action -edit" type="button">
+                  <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
+                </button>
+              </RouterLink>
               <button class="item__action -remove" type="button">
                 <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="edit">
               </button>
@@ -65,7 +83,7 @@ import Item from "@/components/Item.vue";
 
       <div class="house-details__list">
         <h3 class="house-details__list-title">Recommended for you</h3>
-        <Item/>
+        <Item v-for="house in state.houses" :house="house"/>
       </div>
     </div>
   </div>
