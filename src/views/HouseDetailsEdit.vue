@@ -37,7 +37,20 @@ onMounted(() => {
   if (state.house) {
     form.value = {
       ...form.value,
-      price: state.house.price
+      price: state.house.price,
+      bedrooms: state.house.rooms.bedrooms,
+      bathrooms: state.house.rooms.bathrooms,
+      size: state.house.size,
+      streetName: state.house.location.street,
+      //todo guess it's better to use regex here
+      houseNumber: state.house.location.street.split(" ")[1],
+      //todo no number yet
+      numberAddition: "",
+      zip: state.house.location.zip,
+      city: state.house.location.city,
+      constructionYear: state.house.constructionYear,
+      hasGarage: state.house.hasGarage,
+      description: state.house.description,
     }
   }
 });
@@ -51,6 +64,7 @@ async function handleSubmit(): Promise<void> {
   const {data} = await editHouse(route.params.houseId as any, form.value)
   await addHouseImage(data.id, image.value);
 }
+
 </script>
 
 <template>
@@ -177,7 +191,7 @@ async function handleSubmit(): Promise<void> {
                  placeholder="Enter description"
                  required/>
         </label>
-        <button class="house-create__post" type="submit">Post</button>
+        <button class="house-create__post" type="submit">Save</button>
       </form>
     </div>
   </div>

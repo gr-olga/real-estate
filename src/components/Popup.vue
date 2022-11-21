@@ -1,13 +1,18 @@
 <script setup lang="ts">
 
+import {deleteHouse} from "@/services/HouseService";
+
+function handleDelete(){
+  //deleteHouse(id)
+}
 </script>
 
 <template>
   <div class="popup">
     <h1 class="popup__title">Delete listing</h1>
     <p class="popup__text">Are you sure you want to delete this listing? This action cannot be undone</p>
-    <button class="popup__btn -yes">Yes, delete</button>
-    <button class="popup__btn -no">Go back</button>
+    <button class="popup__btn -yes" @onClick="handleDelete">Yes, delete</button>
+    <button class="popup__btn -no" @onClick="handleClose">Go back</button>
 
   </div>
 </template>

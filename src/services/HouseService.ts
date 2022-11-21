@@ -35,3 +35,9 @@ export function editHouse(houseId: string, data: NewHouseType): Promise<AxiosRes
         headers: {'X-Api-Key': apiKey}
     });
 }
+
+export function deleteHouse(houseId: string): Promise<AxiosResponse<HouseType>> {
+    return axios.post(`${url}/${houseId}`, {
+        headers: {'X-Api-Key': apiKey}
+    });
+}

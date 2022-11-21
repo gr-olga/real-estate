@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 import Item from "@/components/Item.vue";
 import {reactive, ref} from "vue";
 import {getHouses} from "@/services/HouseService";

@@ -10,8 +10,9 @@ import Popup from "@/components/Popup.vue";
     <div class="wrapper">
       <nav>
         <RouterLink to="/">overview</RouterLink>
+        <p></p>
         <RouterLink to="/house-create">house-create</RouterLink>
-        <RouterLink to="/house-details">house-details</RouterLink>
+        <p></p>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>

@@ -4,6 +4,7 @@ import {HouseType} from "@/models/HouseType";
 import {reactive, Ref, ref} from "vue";
 import type {NewHouseType} from "@/models/NewHouseType";
 import {addHouseImage, createHouse} from "@/services/HouseService";
+import router from "@/router";
 
 interface OverviewState {
   houses: ReadonlyArray<HouseType>
@@ -55,7 +56,10 @@ function onAddFile($event: Event): void {
 async function handleSubmit(): Promise<void> {
   const {data} = await createHouse(form.value)
   await addHouseImage(data.id, image.value);
+  await router.push(`/house-details/${data.id}`)
 }
+
+
 </script>
 
 <template>

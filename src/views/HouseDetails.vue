@@ -1,36 +1,48 @@
 <script setup lang="ts">
 import Item from "@/components/Item.vue";
 import {HouseType} from "@/models/HouseType";
-import {reactive} from "vue";
-import {getHouses} from "@/services/HouseService";
+import {onMounted, reactive} from "vue";
+import router from "@/router";
+import {useRoute} from "vue-router";
+import {store} from "@/store";
+
+const route = useRoute();
+
+interface EditState {
+  house: HouseType | undefined
+}
 
 interface OverviewState {
   houses: ReadonlyArray<HouseType>
 }
 
-const state: OverviewState = reactive({
-  houses: [],
+const state: EditState = reactive({
+  house: undefined
 })
 
-getHouses().then((res) => {
-  state.houses = res.data;
-}).catch((e) => {
-  console.error('Error fetching Houses');
-})
+onMounted(() => {
+  state.house = store.state.houses.find((house) => String(house.id) === String(route.params.houseId))
+  console.log(state.house)
+});
+
+function goToEdit(id: string): void {
+  router.push(`/edit/${id}`)
+}
+
 </script>
 
 <template>
-  <div class="house-details">
+  <div class="house-details" v-if="state.house">
     <RouterLink to="/" class="house-details__back"> ← Back to overview</RouterLink>
     <div class="house-details__all">
       <div class="house-details__item">
         <img class="house-details__item-image" src="@/assets/images/img_placeholder_house@3x.png" alt="house">
         <div class="house-details__info">
-          <div class="house-details__address-line">
+          <div class="house-details__address-line">e
             <h1 class="house-details__address-title">Address</h1>
             <div class="item__actions">
               <RouterLink to="/edit">
-                <button class="item__action -edit" type="button">
+                <button class="item__action -edit" type="button" @click="goToEdit(state.house.id)">
                   <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
                 </button>
               </RouterLink>
@@ -41,34 +53,35 @@ getHouses().then((res) => {
           </div>
           <div class="house-details__block">
             <img class="house-details__icon" src="@/assets/images/ic_location@3x.png" alt="location">
-            <h5 class="house-details__block-text">1011 Amsterdam</h5>
+            <h5 class="house-details__block-text">zip</h5>
           </div>
           <div class="house-details__block">
             <div class="house-details__block">
               <img class="house-details__icon" src="@/assets/images/ic_price@3x.png" alt="price">
-              <h5 class="house-details__block-text">500.000</h5>
+              <h5 class="house-details__block-text">{{ state.house.price }}</h5>
             </div>
             <div class="house-details__block">
               <img class="house-details__icon -inside" src="@/assets/images/ic_size@3x.png" alt="price">
-              <h5 class="house-details__block-text">120m2</h5>
+              <h5 class="house-details__block-text">{{ state.house.size }}</h5>
             </div>
             <div class="house-details__block">
               <img class="house-details__icon -inside" src="@/assets/images/ic_construction_date@3x.png" alt="price">
-              <h5 class="house-details__block-text">Build in 1990</h5>
+              <h5 class="house-details__block-text">Build in {{ state.house.constructionYear }}</h5>
             </div>
           </div>
           <div class="house-details__block">
             <div class="house-details__block">
               <img class="house-details__icon" src="@/assets/images/ic_bed@3x.png" alt="price">
-              <h5 class="house-details__block-text">5</h5>
+              <h5 class="house-details__block-text">{{ state.house.rooms.bedrooms }}</h5>
             </div>
             <div class="house-details__block">
               <img class="house-details__icon -inside" src="@/assets/images/ic_bath@3x.png" alt="price">
-              <h5 class="house-details__block-text">2</h5>
+              <h5 class="house-details__block-text">{{ state.house.rooms.bathrooms }}</h5>
             </div>
             <div class="house-details__block">
               <img class="house-details__icon -inside" src="@/assets/images/ic_garage@3x.png" alt="price">
-              <h5 class="house-details__block-text">Yes</h5>
+              <h5 class="house-details__block-text" v-if="state.house.hasGarage">Yes</h5>
+              <h5 class="house-details__block-text" v-else>No</h5>
             </div>
           </div>
         </div>

@@ -9,12 +9,19 @@ defineProps<{
 function goToEdit(id: string): void {
   router.push(`/edit/${id}`)
 }
+
+function goToDetails(id: string): void {
+  router.push(`/house-details/${id}`)
+}
+
 </script>
 
 <template>
   <div class="item">
     <div class="item__details">
-      <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
+      <button @click="goToDetails(house.id)" class="item__detail-link">
+        <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
+      </button>
       <div class="item__details-info">
         <h3 class="item__details-address">{{ house.location.street }}</h3>
         <div class="item__details-prize">€ {{ house.price }}</div>
@@ -34,7 +41,7 @@ function goToEdit(id: string): void {
         <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
       </button>
       <button class="item__action -remove" type="button">
-        <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="edit">
+        <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="bin">
       </button>
     </div>
   </div>
@@ -52,6 +59,10 @@ function goToEdit(id: string): void {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
   align-items: flex-start;
 
+  &__detail-link{
+    border: none;
+    background-color: transparent;
+  }
   &__details {
     display: flex;
     flex-direction: row;
