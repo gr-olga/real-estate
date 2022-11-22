@@ -56,7 +56,7 @@ function onAddFile($event: Event): void {
 async function handleSubmit(): Promise<void> {
   const {data} = await createHouse(form.value)
   await addHouseImage(data.id, image.value);
-  await router.push(`/house-details/${data.id}`)
+  await router.push(`house-details/${data.id}`)
 }
 
 
@@ -283,6 +283,7 @@ async function handleSubmit(): Promise<void> {
     padding: 10px;
     align-self: flex-end;
     margin-top: 20px;
+    cursor: pointer;
   }
 }
 

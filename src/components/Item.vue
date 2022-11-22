@@ -1,19 +1,24 @@
 <script setup lang="ts">
 import type {HouseType} from "@/models/HouseType";
 import router from "@/router";
+import {store} from "@/store";
 
 defineProps<{
   house: HouseType
 }>()
 
 function goToEdit(id: string): void {
-  router.push(`/edit/${id}`)
+  router.push(`edit/${id}`)
 }
 
 function goToDetails(id: string): void {
-  router.push(`/house-details/${id}`)
+  router.push(`house-details/${id}`)
 }
 
+function handleOpen(id: string) {
+  store.commit('setTogglePopup')
+  store.commit('setId', id)
+}
 </script>
 
 <template>
@@ -40,7 +45,7 @@ function goToDetails(id: string): void {
       <button @click="goToEdit(house.id)" class="item__action -edit" type="button">
         <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
       </button>
-      <button class="item__action -remove" type="button">
+      <button class="item__action -remove" type="button" @click="handleOpen(house.id)">
         <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="bin">
       </button>
     </div>
@@ -59,10 +64,11 @@ function goToDetails(id: string): void {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
   align-items: flex-start;
 
-  &__detail-link{
+  &__detail-link {
     border: none;
     background-color: transparent;
   }
+
   &__details {
     display: flex;
     flex-direction: row;
@@ -114,5 +120,6 @@ function goToDetails(id: string): void {
 .item__action {
   border: none;
   background: transparent;
+  cursor: pointer;
 }
 </style>

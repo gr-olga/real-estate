@@ -125,6 +125,7 @@ function sortHouses(houses: ReadonlyArray<HouseType>, option: 'size' | 'price'):
     max-width: 550px;
     min-width: 300px;
     padding: 10px;
+
   }
 
   &__serch-img {

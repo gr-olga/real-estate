@@ -2,6 +2,7 @@
 import {RouterLink, RouterView} from 'vue-router'
 import Header from "@/components/Header.vue";
 import Popup from "@/components/Popup.vue";
+import {store} from "@/store";
 </script>
 
 <template>
@@ -16,11 +17,11 @@ import Popup from "@/components/Popup.vue";
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
-<!--    <Popup/>-->
   </header>
   <div class="app">
     <RouterView/>
   </div>
+  <Popup v-if="store.state.isPopupOpen"/>
 </template>
 
 <style scoped lang="scss">

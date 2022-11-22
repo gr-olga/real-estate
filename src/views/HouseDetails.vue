@@ -26,7 +26,7 @@ onMounted(() => {
 });
 
 function goToEdit(id: string): void {
-  router.push(`/edit/${id}`)
+  router.push(`edit/${id}`)
 }
 
 </script>
@@ -179,6 +179,7 @@ function goToEdit(id: string): void {
   .item__action {
     border: none;
     background: transparent;
+    cursor: pointer;
   }
 
   .item__action-icon {

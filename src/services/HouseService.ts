@@ -31,13 +31,13 @@ export function addHouseImage(houseId: string, image: string): Promise<AxiosResp
 }
 
 export function editHouse(houseId: string, data: NewHouseType): Promise<AxiosResponse<HouseType>> {
-    return axios.post(`${url}/${houseId}`, data, {
+    return axios.post(`${url}/houses/${houseId}`, data, {
         headers: {'X-Api-Key': apiKey}
     });
 }
 
 export function deleteHouse(houseId: string): Promise<AxiosResponse<HouseType>> {
-    return axios.post(`${url}/${houseId}`, {
+    return axios.delete(`${url}/houses/${houseId}`, {
         headers: {'X-Api-Key': apiKey}
     });
 }
