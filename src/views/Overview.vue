@@ -50,8 +50,8 @@ const sortHouses = computed(() => {
       <input class="overview__search" type="search" placeholder="Search for a house" v-model="searchInput"/>
       <!--      <img class="overview__search-img" src="@/assets/images/ic_search@3x.png" alt="search">-->
       <div class="overview__sort">
-        <button class="overview__sort-btn" @click="state.sortBy = 'price'">Price</button>
-        <button class="overview__sort-btn" @click="state.sortBy = 'size'">Size</button>
+        <button class="overview__sort-btn" @click="state.sortBy = 'price'" :class="{'-active': state.sortBy === 'price'}">Price</button>
+        <button class="overview__sort-btn" @click="state.sortBy = 'size'" :class="{'-active': state.sortBy === 'size'}">Size</button>
       </div>
     </div>
     <div class="overview__items-box">
@@ -99,8 +99,8 @@ const sortHouses = computed(() => {
   }
 
   &__sort-btn {
-    background-color: color.$primary-element-color;
-    border: #EB5440 1px solid;
+    background-color: color.$tertiary-element-color2;
+    border: color.$tertiary-element-color2 1px solid;
     border-radius: 5px;
     max-width: 450px;
     min-width: 100px;
@@ -109,6 +109,21 @@ const sortHouses = computed(() => {
     color: white;
     padding: 10px;
     cursor: pointer;
+
+    &.-active {
+      background-color: color.$primary-element-color;
+      border-color: color.$primary-element-color;
+    }
+
+    &:not(:last-of-type) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:not(:first-of-type) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
 
   &__search {
