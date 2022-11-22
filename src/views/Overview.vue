@@ -6,7 +6,7 @@ import type {HouseType} from "@/models/HouseType";
 import {store} from "@/store";
 import Empty from "@/components/Empty.vue";
 
-let input = ref("");
+let searchInput = ref("");
 
 interface OverviewState {
   sortBy: 'price' | 'size' | ''
@@ -22,9 +22,18 @@ getHouses().then((res) => {
   console.error('Error fetching Houses');
 })
 
-const sortHouses = computed(() => {
-  return [...store.state.houses].sort((a: HouseType, b: HouseType) => (a as any)[state.sortBy] - (b as any)[state.sortBy])
+const filteredHouses = computed(() => {
+  return [...store.state.houses].filter(({location}: HouseType) => {
+    const searchBy = `${location.street} ${location.city} ${location.zip}`.toLowerCase();
+    return searchBy.includes(searchInput.value.toLowerCase())
+  })
 })
+
+const sortHouses = computed(() => {
+  return [...filteredHouses.value].sort((a: HouseType, b: HouseType) => (a as any)[state.sortBy] - (b as any)[state.sortBy])
+})
+
+
 
 
 </script>
@@ -38,7 +47,7 @@ const sortHouses = computed(() => {
       </RouterLink>
     </div>
     <div class="overview__line">
-      <input class="overview__search" type="search" placeholder="Search for a house" v-model="input"/>
+      <input class="overview__search" type="search" placeholder="Search for a house" v-model="searchInput"/>
       <!--      <img class="overview__search-img" src="@/assets/images/ic_search@3x.png" alt="search">-->
       <div class="overview__sort">
         <button class="overview__sort-btn" @click="state.sortBy = 'price'">Price</button>
@@ -46,7 +55,7 @@ const sortHouses = computed(() => {
       </div>
     </div>
     <div class="overview__items-box">
-      <Empty v-if="state.sortBy.length"/>
+      <Empty v-if="sortHouses.length === 0"/>
       <Item v-for="house in sortHouses" :house="house"/>
     </div>
   </div>

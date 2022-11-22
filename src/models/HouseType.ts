@@ -3,7 +3,7 @@ export interface HouseType {
     readonly createdAt: string,
     readonly description: string,
     readonly hasGarage: boolean,
-    readonly id: string,
+    readonly id: number,
     readonly image: string,
     readonly location: LocationType,
     readonly madeByMe: boolean,
