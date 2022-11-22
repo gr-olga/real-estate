@@ -3,6 +3,7 @@ import {RouterLink, RouterView} from 'vue-router'
 import Header from "@/components/Header.vue";
 import Popup from "@/components/Popup.vue";
 import {store} from "@/store";
+
 </script>
 
 <template>
@@ -33,5 +34,6 @@ import {store} from "@/store";
   justify-content: center;
   align-items: center;
   background-color: color.$background1-element-color;
+  width: 100%;
 }
 </style>

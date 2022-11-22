@@ -1,48 +1,30 @@
 <script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 import Item from "@/components/Item.vue";
-import {reactive, ref} from "vue";
+import {computed, reactive, ref} from "vue";
 import {getHouses} from "@/services/HouseService";
 import type {HouseType} from "@/models/HouseType";
 import {store} from "@/store";
+import Empty from "@/components/Empty.vue";
 
 let input = ref("");
 
 interface OverviewState {
-  houses: ReadonlyArray<HouseType>
+  sortBy: 'price' | 'size' | ''
 }
 
-const state: OverviewState = reactive({
-  houses: [],
+const state = reactive({
+  sortBy: ''
 })
 
 getHouses().then((res) => {
-  state.houses = res.data;
   store.commit('setHouses', res.data)
 }).catch((e) => {
   console.error('Error fetching Houses');
 })
 
-function sortHouses(houses: ReadonlyArray<HouseType>, option: 'size' | 'price'): void {
-  state.houses = [...houses].sort((a: HouseType, b: HouseType) => a[option] - b[option])
-}
-
-// function filteredList() {
-// let search = ref(input)
-//  return state.houses.filter(house => {
-//      Array.prototype.filter.call(house, (x) => x <= "b")
-//     })
-//  let search = ref(input)
-//  state.houses.filter(house =>{
-//       let newArray = [];
-//       const serach = input.value.toLowerCase();
-//       for (key in obj) {
-//         el = house[key]
-//         if (el.name.toLowerCase().indexOf(serach) != -1) newArray.push(el);
-//       }
-//       return newArray;
-//     })
-//
-// }
+const sortHouses = computed(() => {
+  return [...store.state.houses].sort((a: HouseType, b: HouseType) => (a as any)[state.sortBy] - (b as any)[state.sortBy])
+})
 
 
 </script>
@@ -59,12 +41,13 @@ function sortHouses(houses: ReadonlyArray<HouseType>, option: 'size' | 'price'):
       <input class="overview__search" type="search" placeholder="Search for a house" v-model="input"/>
       <!--      <img class="overview__search-img" src="@/assets/images/ic_search@3x.png" alt="search">-->
       <div class="overview__sort">
-        <button class="overview__sort-btn" @click="sortHouses(state.houses, 'price')">Prise</button>
-        <button class="overview__sort-btn" @click="sortHouses(state.houses, 'size')">Size</button>
+        <button class="overview__sort-btn" @click="state.sortBy = 'price'">Price</button>
+        <button class="overview__sort-btn" @click="state.sortBy = 'size'">Size</button>
       </div>
     </div>
     <div class="overview__items-box">
-      <Item v-for="house in state.houses" :house="house"/>
+      <Empty v-if="state.sortBy.length"/>
+      <Item v-for="house in sortHouses" :house="house"/>
     </div>
   </div>
 </template>
@@ -78,6 +61,7 @@ function sortHouses(houses: ReadonlyArray<HouseType>, option: 'size' | 'price'):
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 
   &__title {
     font-size: 32px;

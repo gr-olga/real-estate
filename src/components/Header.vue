@@ -23,6 +23,7 @@
   margin: auto;
   background-color: white;
   align-items: center;
+  padding-top: 20px;
 
 
   &__img {

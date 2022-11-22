@@ -36,7 +36,7 @@ function handleClose(): void {
   justify-content: center;
   align-items: center;
   z-index: 9;
-  background-color: rgba(234, 226, 226, 0.6);
+  background-color: #4a4b4cbf;
   transition: visibility .35s, opacity 0.35s ease-in-out;
 
   &__box {
