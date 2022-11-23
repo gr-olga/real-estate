@@ -47,7 +47,7 @@ function goToEdit(id: string): void {
                 </button>
               </RouterLink>
               <button class="item__action -remove" type="button">
-                <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="edit">
+                <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="delete">
               </button>
             </div>
           </div>
@@ -96,7 +96,7 @@ function goToEdit(id: string): void {
 
       <div class="house-details__list">
         <h3 class="house-details__list-title">Recommended for you</h3>
-        <Item v-for="house in state.houses" :house="house"/>
+        <Item v-for="house in store.state.houses" :house="house"/>
       </div>
     </div>
   </div>

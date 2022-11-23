@@ -31,23 +31,6 @@ const form: Ref<NewHouseType> = ref({
   description: ""
 })
 
-//todo debug
-function demo(): void {
-  form.value = {
-    price: 20,
-    bedrooms: 1,
-    bathrooms: 1,
-    size: 1,
-    streetName: 'Overtoom',
-    houseNumber: '21',
-    numberAddition: '1',
-    zip: '1181TY',
-    city: 'Amsterdam',
-    constructionYear: 1960,
-    hasGarage: false,
-    description: 'Nice house!'
-  }
-}
 
 let image = ref(null as any)
 
@@ -67,9 +50,6 @@ async function handleSubmit(): Promise<void> {
 <template>
   <div class="box">
     <div class="house-create">
-      <!--      //todo debug-->
-      <button type="button" @click="demo">demo</button>
-      <!--      //todo debug-->
       <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
       <h1 class="house-create__title">Create new listing</h1>
       <form name="add-house" class="house-create__form" @submit.prevent="handleSubmit">
@@ -237,6 +217,7 @@ async function handleSubmit(): Promise<void> {
     align-items: center;
     max-width: 400px;
     margin-top: 20px;
+    margin-bottom: 30px;
   }
 
   &__label {
