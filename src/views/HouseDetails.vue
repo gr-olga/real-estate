@@ -25,7 +25,7 @@ onMounted(() => {
   state.house = store.state.houses.find((house) => String(house.id) === String(route.params.houseId))
 });
 
-function goToEdit(id: string): void {
+function goToEdit(id: number): void {
   router.push(`edit/${id}`)
 }
 
@@ -33,14 +33,19 @@ function goToEdit(id: string): void {
 
 <template>
   <div class="house-details" v-if="state.house">
-    <RouterLink to="/" class="house-details__back"> ← Back to overview</RouterLink>
+    <RouterLink to="/" class="house-details__back">
+      <img src="@/assets/images/ic_back_grey@3x.png"
+           alt="back arrow"
+           class="house-details__icon"/>
+      Back to overview
+    </RouterLink>
     <div class="house-details__all">
       <div class="house-details__item">
         <img class="house-details__item-image" src="@/assets/images/img_placeholder_house@3x.png" alt="house">
         <div class="house-details__info">
           <div class="house-details__address-line">
             <h1 class="house-details__address-title">{{ state.house.location.street }}</h1>
-            <div class="item__actions" v-if="isMyItem(state.house.id)">
+            <div class="house-details__actions" v-if="isMyItem(state.house.id)">
               <RouterLink to="/edit">
                 <button class="item__action -edit" type="button" @click="goToEdit(state.house.id)">
                   <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
@@ -53,7 +58,7 @@ function goToEdit(id: string): void {
           </div>
           <div class="house-details__block">
             <img class="house-details__icon" src="@/assets/images/ic_location@3x.png" alt="location">
-            <h5 class="house-details__block-text">{{ state.house.location.zip }}</h5>
+            <h5 class="house-details__block-text">{{ state.house.location.zip }} {{ state.house.location.city }}</h5>
           </div>
           <div class="house-details__block">
             <div class="house-details__block">
@@ -104,16 +109,23 @@ function goToEdit(id: string): void {
 </template>
 
 <style scoped lang="scss">
+@use '@/assets/_colors.scss' as color;
+
 .house-details {
   display: flex;
   flex-direction: column;
 
   &__back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
     font-size: 18px;
     color: #4A4B4C;
     text-decoration: none;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    font-weight: bold;
   }
 
   &__all {
@@ -129,14 +141,14 @@ function goToEdit(id: string): void {
   }
 
   &__info {
-    padding: 40px 30px;
+    padding: 20px 30px;
   }
-
 
   &__address-line {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__address-title {
@@ -153,7 +165,7 @@ function goToEdit(id: string): void {
 
   &__block-text {
     font-size: 18px;
-    color: #4A4B4C;
+    color: color.$secondary-text-color;
     margin-left: 10px;
   }
 
@@ -197,6 +209,11 @@ function goToEdit(id: string): void {
   &__list-title {
     font-size: 18px;
     font-weight: bold;
+  }
+
+  &__icon {
+    width: 15px;
+    height: 15px;
   }
 }
 
