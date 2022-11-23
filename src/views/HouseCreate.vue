@@ -1,36 +1,23 @@
 <script setup lang="ts">
-
-import {HouseType} from "@/models/HouseType";
-import {reactive, Ref, ref} from "vue";
+import {Ref, ref} from "vue";
 import type {NewHouseType} from "@/models/NewHouseType";
 import {addHouseImage, createHouse} from "@/services/HouseService";
 import router from "@/router";
 
-// import UploadImage from "@/components/UploadImage"
-
-interface OverviewState {
-  houses: ReadonlyArray<HouseType>
-}
-
-const state: OverviewState = reactive({
-  houses: [],
-})
-
 const form: Ref<NewHouseType> = ref({
-  price: 0,
-  bedrooms: 0,
-  bathrooms: 0,
-  size: 0,
+  price: "" as any,
+  bedrooms: "" as any,
+  bathrooms: "" as any,
+  size: "" as any,
   streetName: "",
   houseNumber: "",
   numberAddition: "",
   zip: "",
   city: "",
-  constructionYear: 1600,
+  constructionYear: "" as any,
   hasGarage: false,
   description: ""
 })
-
 
 let image = ref(null as any)
 
@@ -43,14 +30,17 @@ async function handleSubmit(): Promise<void> {
   await addHouseImage(data.id, image.value);
   await router.push(`house-details/${data.id}`)
 }
-
-
 </script>
 
 <template>
   <div class="box">
     <div class="house-create">
-      <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
+      <RouterLink to="/" class="house-create__back">
+        <img src="@/assets/images/ic_back_grey@3x.png"
+             alt="back arrow"
+             class="house-create__icon -back "/>
+        Back to overview
+      </RouterLink>
       <h1 class="house-create__title">Create new listing</h1>
       <form name="add-house" class="house-create__form" @submit.prevent="handleSubmit">
         <label class="house-create__label">
@@ -131,8 +121,8 @@ async function handleSubmit(): Promise<void> {
                     v-model="form.hasGarage"
                     required>
               <option class="house-create__input" value="">Select</option>
-              <option class="house-create__input" :value="true">yes</option>
-              <option class="house-create__input" :value="false">no</option>
+              <option class="house-create__input" :value="true">Yes</option>
+              <option class="house-create__input" :value="false">No</option>
             </select>
           </label>
         </div>
@@ -142,7 +132,7 @@ async function handleSubmit(): Promise<void> {
             <input type="number"
                    class="house-create__input -bedrooms -double"
                    v-model="form.bedrooms"
-                   placeholder="enter amount"
+                   placeholder="Enter amount"
                    min="0"
                    required/>
           </label>
@@ -151,7 +141,7 @@ async function handleSubmit(): Promise<void> {
             <input type="number"
                    class="house-create__input -bathroom -double"
                    v-model="form.bathrooms"
-                   placeholder="enter amount"
+                   placeholder="Enter amount"
                    min="0"
                    required/>
           </label>
@@ -162,16 +152,17 @@ async function handleSubmit(): Promise<void> {
                  class="house-create__input -construction-date"
                  v-model="form.constructionYear"
                  placeholder="e.g. 1990"
-                 min="1600"
+                 min="1500"
                  required/>
         </label>
         <label class="house-create__label">
           <span class="house-create__label-text">Description*</span>
-          <input type="text"
-                 class="house-create__input -description"
-                 v-model="form.description"
-                 placeholder="Enter description"
-                 required/>
+          <textarea
+              rows="7"
+              class="house-create__input -description"
+              v-model="form.description"
+              placeholder="Enter description"
+              required/>
         </label>
         <button class="house-create__post" type="submit">Post</button>
       </form>
@@ -199,9 +190,21 @@ async function handleSubmit(): Promise<void> {
 
   &__back {
     font-size: 18px;
-    color: #4A4B4C;
+    color: color.$secondary-text-color;
     margin-top: 20px;
     text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+  }
+
+  &__icon {
+    &.-back {
+      width: 15px;
+      height: 15px;
+    }
   }
 
   &__title {
@@ -256,14 +259,14 @@ async function handleSubmit(): Promise<void> {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     color: #444;
-    background: #fff;
+    background: #FFF;
     border-radius: 10px;
     border: 1px solid #555;
 
     .-image[type=file]::file-selector-button {
       margin-right: 20px;
       border: none;
-      background: #084cdf;
+      background: #084CDF;
       padding: 10px 20px;
       border-radius: 10px;
       color: #fff;
@@ -272,9 +275,8 @@ async function handleSubmit(): Promise<void> {
     }
 
     .-image[type=file]::file-selector-button:hover {
-      background: #0d45a5;
+      background: #0D45A5;
     }
-
   }
 
   .drop-container {
@@ -301,7 +303,7 @@ async function handleSubmit(): Promise<void> {
   }
 
   .drop-container:hover {
-    background: #eee;
+    background: #EEE;
     border-color: #111;
   }
 
@@ -323,7 +325,7 @@ async function handleSubmit(): Promise<void> {
 
   &__post {
     background-color: color.$primary-element-color;
-    border: #EB5440 1px solid;
+    border: color.$primary-element-color 1px solid;
     border-radius: 5px;
     max-width: 250px;
     min-width: 100px;
