@@ -23,7 +23,7 @@ function handleOpen(id: number): void {
 </script>
 
 <template>
-  <div class="item">
+  <div class="item" v-if="house">
     <div class="item__details">
       <button @click="goToDetails(house.id)" class="item__detail-link">
         <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
