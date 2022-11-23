@@ -117,13 +117,15 @@ async function handleSubmit(): Promise<void> {
                    placeholder="e.g. Utrecht"
                    required/>
           </label>
-          <label class="house-create__label">
+          <label class="house-create__label drop">
             <span class="house-create__label-text">Upload picture(PNG or JPG)*</span>
-            <input type="file"
-                   class="house-create__input -image"
-                   alt="house"
-                   @change="onAddFile"
-                   required/>
+            <label class="drop-container">
+              <input type="file"
+                     class="house-create__input -image"
+                     alt="house"
+                     @change="onAddFile"
+                     required/>
+            </label>
             <img v-if="image" :src="image" alt="Uploaded House image"/>
           </label>
 
@@ -264,6 +266,7 @@ async function handleSubmit(): Promise<void> {
     color: color.$secondary-text-color;
   }
 
+
   &__input {
     min-width: 350px;
     max-width: 500px;
@@ -274,6 +277,71 @@ async function handleSubmit(): Promise<void> {
     border: white 1px solid;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
+  }
+
+  .drop {
+    align-self: flex-start;
+  }
+
+  .-image {
+    visibility: hidden;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #444;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #555;
+
+    .-image[type=file]::file-selector-button {
+      margin-right: 20px;
+      border: none;
+      background: #084cdf;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s ease-in-out;
+    }
+
+    .-image[type=file]::file-selector-button:hover {
+      background: #0d45a5;
+    }
+
+  }
+
+  .drop-container {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #555;
+    color: #444;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+    background-image: url("@/assets/images/ic_upload@3x.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .drop-container:hover {
+    background: #eee;
+    border-color: #111;
+  }
+
+  .drop-container:hover .drop-title {
+    color: #222;
   }
 
   &__box {
