@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import {store} from "@/store";
 import {deleteHouse, getHouses} from "@/services/HouseService";
+import router from "@/router";
 
 async function handleDelete(): Promise<void> {
   await deleteHouse(store.state.id)
   const res = await getHouses()
   store.commit('setHouses', res.data)
   store.commit('setTogglePopup')
+  router.push('/')
 }
 
 function handleClose(): void {

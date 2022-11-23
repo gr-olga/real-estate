@@ -26,9 +26,13 @@ onMounted(() => {
 });
 
 function goToEdit(id: number): void {
-  router.push(`edit/${id}`)
+  router.push(`/edit/${id}`)
 }
 
+function handleOpen(id: number): void {
+  store.commit('setTogglePopup')
+  store.commit('setId', id)
+}
 </script>
 
 <template>
@@ -46,12 +50,10 @@ function goToEdit(id: number): void {
           <div class="house-details__address-line">
             <h1 class="house-details__address-title">{{ state.house.location.street }}</h1>
             <div class="house-details__actions" v-if="isMyItem(state.house.id)">
-              <RouterLink to="/edit">
-                <button class="item__action -edit" type="button" @click="goToEdit(state.house.id)">
-                  <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
-                </button>
-              </RouterLink>
-              <button class="item__action -remove" type="button">
+              <button class="item__action -edit" type="button" @click="goToEdit(state.house.id)">
+                <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
+              </button>
+              <button class="item__action -remove" type="button" @click="handleOpen(state.house.id)">
                 <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="delete">
               </button>
             </div>

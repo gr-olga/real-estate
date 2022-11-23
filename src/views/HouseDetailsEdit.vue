@@ -63,7 +63,7 @@ function onAddFile($event: Event): void {
 async function handleSubmit(): Promise<void> {
   const {data} = await editHouse(Number(route.params.houseId), form.value)
   await addHouseImage(data.id, image.value);
-  await router.push(`house-details/${data.id}`)
+  await router.push(`/house-details/${data.id}`)
 }
 
 </script>
@@ -164,7 +164,7 @@ async function handleSubmit(): Promise<void> {
               <input type="number"
                      class="house-create__input -bedrooms -double"
                      v-model="form.bedrooms"
-                     placeholder="enter amount"
+                     placeholder="Enter amount"
                      min="0"
                      required/>
             </label>
@@ -173,7 +173,7 @@ async function handleSubmit(): Promise<void> {
               <input type="number"
                      class="house-create__input -bathroom -double"
                      v-model="form.bathrooms"
-                     placeholder="enter amount"
+                     placeholder="Enter amount"
                      min="0"
                      required/>
             </label>
@@ -228,13 +228,12 @@ async function handleSubmit(): Promise<void> {
 .house-create {
   display: flex;
   flex-direction: column;
-  //background-image: url("@/assets/images/img_background@3x.png");
   max-width: 100%;
   align-self: flex-start;
 
   &__back {
     font-size: 18px;
-    color: #4A4B4C;
+    color: color.$secondary-text-color;
     margin-top: 20px;
     text-decoration: none;
   }
@@ -291,7 +290,7 @@ async function handleSubmit(): Promise<void> {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     color: #444;
-    background: #fff;
+    background: #FFF;
     border-radius: 10px;
     border: 1px solid #555;
 
@@ -307,9 +306,8 @@ async function handleSubmit(): Promise<void> {
     }
 
     .-image[type=file]::file-selector-button:hover {
-      background: #0d45a5;
+      background: #0D45A5;
     }
-
   }
 
   .drop-container {
@@ -336,7 +334,7 @@ async function handleSubmit(): Promise<void> {
   }
 
   .drop-container:hover {
-    background: #eee;
+    background: #EEE;
     border-color: #111;
   }
 
@@ -358,7 +356,7 @@ async function handleSubmit(): Promise<void> {
 
   &__post {
     background-color: color.$primary-element-color;
-    border: #EB5440 1px solid;
+    border: color.$primary-element-color 1px solid;
     border-radius: 5px;
     max-width: 250px;
     min-width: 100px;

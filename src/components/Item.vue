@@ -9,14 +9,15 @@ defineProps<{
 }>()
 
 function goToEdit(id: number): void {
-  router.push(`edit/${id}`)
+  router.push(`/edit/${id}`)
+  router.push(`/edit/${id}`)
 }
 
 function goToDetails(id: number): void {
-  router.push(`house-details/${id}`)
+  router.push(`/house-details/${id}`)
 }
 
-function handleOpen(id: number) {
+function handleOpen(id: number): void {
   store.commit('setTogglePopup')
   store.commit('setId', id)
 }

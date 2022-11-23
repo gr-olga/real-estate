@@ -28,7 +28,7 @@ function onAddFile($event: Event): void {
 async function handleSubmit(): Promise<void> {
   const {data} = await createHouse(form.value)
   await addHouseImage(data.id, image.value);
-  await router.push(`house-details/${data.id}`)
+  await router.push(`/house-details/${data.id}`)
 }
 </script>
 
