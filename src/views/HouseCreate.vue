@@ -176,7 +176,9 @@ async function handleSubmit(): Promise<void> {
 .box {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  background-image: url("@/assets/images/img_background@3x.png");
+  background-size: 100vw;
+  width: 100%;
   justify-content: center;
   align-items: center;
 }
@@ -184,9 +186,8 @@ async function handleSubmit(): Promise<void> {
 .house-create {
   display: flex;
   flex-direction: column;
-  background-image: url("@/assets/images/img_background@3x.png");
-  max-width: 100%;
-  align-self: flex-start;
+  width: 80%;
+  align-items: flex-start;
 
   &__back {
     font-size: 18px;
