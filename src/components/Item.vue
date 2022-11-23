@@ -8,15 +8,15 @@ defineProps<{
   house: HouseType
 }>()
 
-function goToEdit(id: string): void {
+function goToEdit(id: number): void {
   router.push(`edit/${id}`)
 }
 
-function goToDetails(id: string): void {
+function goToDetails(id: number): void {
   router.push(`house-details/${id}`)
 }
 
-function handleOpen(id: string) {
+function handleOpen(id: number) {
   store.commit('setTogglePopup')
   store.commit('setId', id)
 }
@@ -29,16 +29,22 @@ function handleOpen(id: string) {
         <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
       </button>
       <div class="item__details-info">
-        <h3 class="item__details-address">{{ house.location.street }}</h3>
-        <div class="item__details-prize">€ {{ house.price }}</div>
-        <h5 class="item__details-text">{{ house.location.zip }}</h5>
+        <h3 class="item__details-address" @click="goToDetails(house.id)">{{ house.location.street }}</h3>
+        <div class="item__details-price">€ {{ house.price }}</div>
+        <div class="item__details-zip">{{ house.location.zip }}</div>
         <div class="item__details-box">
-          <img class="item__details-icon" src="@/assets/images/ic_bed@3x.png" alt="bed">
-          <h5>{{ house.rooms.bedrooms }}</h5>
-          <img class="item__details-icon" src="@/assets/images/ic_bath@3x.png" alt="bed">
-          <h5>{{ house.rooms.bathrooms }}</h5>
-          <img class="item__details-icon" src="@/assets/images/ic_size@3x.png" alt="bed">
-          <h5>{{ house.size }}</h5>
+          <div class="item__detail-box-item">
+            <img class="item__details-icon" src="@/assets/images/ic_bed@3x.png" alt="bed">
+            <div>{{ house.rooms.bedrooms }}</div>
+          </div>
+          <div class="item__detail-box-item">
+            <img class="item__details-icon" src="@/assets/images/ic_bath@3x.png" alt="bed">
+            <div>{{ house.rooms.bathrooms }}</div>
+          </div>
+          <div class="item__detail-box-item">
+            <img class="item__details-icon" src="@/assets/images/ic_size@3x.png" alt="bed">
+            <div>{{ house.size }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -54,6 +60,8 @@ function handleOpen(id: string) {
 </template>
 
 <style scoped lang="scss">
+@use '@/assets/_colors.scss' as color;
+
 .item {
   display: flex;
   flex-direction: row;
@@ -68,6 +76,7 @@ function handleOpen(id: string) {
   &__detail-link {
     border: none;
     background-color: transparent;
+    cursor: pointer;
   }
 
   &__details {
@@ -77,21 +86,34 @@ function handleOpen(id: string) {
 
   &__details-info {
     margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px 0;
   }
 
   &__details-img {
     width: 150px;
     height: 150px;
+    border-radius: 5px;
+  }
+
+  &__detail-box-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
   &__details-address {
     font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
   }
 
-  &__details-prize {
+  &__details-price {
     font-size: 18px;
-    color: #4A4B4C;
+    color: color.$secondary-text-color;
   }
 
   &__details-icon {
@@ -99,18 +121,23 @@ function handleOpen(id: string) {
     height: 15px;
   }
 
-  &__details-text {
+  &__details-zip {
     font-size: 18px;
-    color: #4A4B4C;
+    color: color.$tertiary-element-color2;
+    text-transform: uppercase;
   }
 
   &__details-box {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 20px;
     margin-top: 10px;
+    color: color.$secondary-text-color;
   }
+}
 
+.item__actions {
+  padding: 10px 0;
 }
 
 .item__action-icon {

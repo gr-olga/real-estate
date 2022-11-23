@@ -32,10 +32,6 @@ const filteredHouses = computed(() => {
 const sortHouses = computed(() => {
   return [...filteredHouses.value].sort((a: HouseType, b: HouseType) => (a as any)[state.sortBy] - (b as any)[state.sortBy])
 })
-
-
-
-
 </script>
 
 <template>
@@ -43,15 +39,27 @@ const sortHouses = computed(() => {
     <div class="overview__line">
       <h1 class="overview__title">Houses</h1>
       <RouterLink to="/house-create" class="overview__create-btn">
-        <button class="overview__create-btn"> + Create new</button>
+        <button type="button" class="overview__create-btn">
+          <img src="@/assets/images/ic_plus_white@3x.png"
+               alt="add icon"
+               class="overview__img"/>
+          Create new
+        </button>
       </RouterLink>
     </div>
     <div class="overview__line">
       <input class="overview__search" type="search" placeholder="Search for a house" v-model="searchInput"/>
-      <!--      <img class="overview__search-img" src="@/assets/images/ic_search@3x.png" alt="search">-->
       <div class="overview__sort">
-        <button class="overview__sort-btn" @click="state.sortBy = 'price'" :class="{'-active': state.sortBy === 'price'}">Price</button>
-        <button class="overview__sort-btn" @click="state.sortBy = 'size'" :class="{'-active': state.sortBy === 'size'}">Size</button>
+        <button type="button" class="overview__sort-btn"
+                @click="state.sortBy = 'price'"
+                :class="{'-active': state.sortBy === 'price'}">
+          Price
+        </button>
+        <button type="button" class="overview__sort-btn"
+                @click="state.sortBy = 'size'"
+                :class="{'-active': state.sortBy === 'size'}">
+          Size
+        </button>
       </div>
     </div>
     <div class="overview__items-box">
@@ -87,21 +95,22 @@ const sortHouses = computed(() => {
 
   &__create-btn {
     background-color: color.$primary-element-color;
-    border: #EB5440 1px solid;
-    border-radius: 5px;
+    border: color.$primary-element-color 1px solid;
+    border-radius: 7px;
     max-width: 350px;
     min-width: 100px;
     font-size: 18px;
     font-weight: bold;
     color: white;
-    padding: 7px;
+    padding: 7px 10px;
     cursor: pointer;
+    text-transform: uppercase;
   }
 
   &__sort-btn {
     background-color: color.$tertiary-element-color2;
     border: color.$tertiary-element-color2 1px solid;
-    border-radius: 5px;
+    border-radius: 7px;
     max-width: 450px;
     min-width: 100px;
     font-size: 12px;
@@ -109,6 +118,7 @@ const sortHouses = computed(() => {
     color: white;
     padding: 10px;
     cursor: pointer;
+    text-transform: capitalize;
 
     &.-active {
       background-color: color.$primary-element-color;
@@ -136,10 +146,9 @@ const sortHouses = computed(() => {
 
   }
 
-  &__serch-img {
-    max-width: 20px;
-    max-height: 20px;
-    margin-left: -300px;
+  &__img {
+    width: 15px;
+    height: 15px;
   }
 
   &__items-box {
