@@ -2,6 +2,7 @@
 import type {HouseType} from "@/models/HouseType";
 import router from "@/router";
 import {store} from "@/store";
+import {isMyItem} from "@/utils/utils";
 
 defineProps<{
   house: HouseType
@@ -41,7 +42,7 @@ function handleOpen(id: string) {
         </div>
       </div>
     </div>
-    <div class="item__actions">
+    <div class="item__actions" v-if="isMyItem(house.id)">
       <button @click="goToEdit(house.id)" class="item__action -edit" type="button">
         <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
       </button>
