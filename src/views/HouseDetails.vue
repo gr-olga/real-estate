@@ -23,7 +23,6 @@ const state: EditState = reactive({
 
 onMounted(() => {
   state.house = store.state.houses.find((house) => String(house.id) === String(route.params.houseId))
-  console.log(state.house)
 });
 
 function goToEdit(id: string): void {

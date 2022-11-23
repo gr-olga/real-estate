@@ -5,11 +5,9 @@ import Popup from "@/components/Popup.vue";
 import {store} from "@/store";</script>
 
 <template>
-  <header>
-    <Header/>
-  </header>
+  <Header/>
   <div class="app">
-  <RouterView/>
+    <RouterView/>
   </div>
   <Popup v-if="store.state.isPopupOpen"/>
 </template>
