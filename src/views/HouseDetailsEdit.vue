@@ -190,7 +190,8 @@ async function handleSubmit(): Promise<void> {
           </label>
           <label class="house-create__label">
             <span class="house-create__label-text">Description*</span>
-            <input type="text"
+            <textarea
+                rows="7"
                    class="house-create__input -description"
                    v-model="form.description"
                    placeholder="Enter description"
