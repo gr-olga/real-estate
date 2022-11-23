@@ -10,7 +10,6 @@ defineProps<{
 
 function goToEdit(id: number): void {
   router.push(`/edit/${id}`)
-  router.push(`/edit/${id}`)
 }
 
 function goToDetails(id: number): void {
