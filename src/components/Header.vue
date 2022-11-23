@@ -34,7 +34,6 @@
     flex-direction: row;
     margin: auto;
     align-items: center;
-    padding-top: 20px;
   }
 
   &__img {
@@ -48,7 +47,7 @@
     align-items: center;
 
     &-item {
-      color: color.$primary-text-color;
+      color: color.$tertiary-element-color2;
       text-decoration: none;
       margin-left: 40px;
       font-size: 18px;
@@ -57,7 +56,8 @@
 }
 
 .current {
-  color: color.$tertiary-element-color2;
+  color: color.$primary-text-color;
+  font-weight: bold;
 }
 
 </style>
