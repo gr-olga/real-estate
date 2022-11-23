@@ -4,7 +4,7 @@ import type {HouseType} from "@/models/HouseType";
 interface StateType {
     houses: ReadonlyArray<HouseType>
     isPopupOpen: boolean
-    id: string
+    id: number
 }
 
 export const store = createStore({
@@ -12,20 +12,20 @@ export const store = createStore({
         return {
             houses: [],
             isPopupOpen: false,
-            id: ""
+            id: null as any
         }
     },
     mutations: {
-        setHouses(state, houses) {
+        setHouses(state: StateType, houses: ReadonlyArray<HouseType>): void {
             state.houses = [...houses];
         },
-        setHouse(state, house) {
+        setHouse(state: StateType, house: HouseType): void {
             state.houses = [...state.houses, house];
         },
-        setTogglePopup(state) {
+        setTogglePopup(state: StateType): void {
             state.isPopupOpen = !state.isPopupOpen
         },
-        setId(state, payload) {
+        setId(state: StateType, payload: number): void {
             state.id = payload
         }
     }

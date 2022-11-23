@@ -36,7 +36,7 @@ function goToEdit(id: number): void {
     <RouterLink to="/" class="house-details__back">
       <img src="@/assets/images/ic_back_grey@3x.png"
            alt="back arrow"
-           class="house-details__icon"/>
+           class="house-details__icon -back "/>
       Back to overview
     </RouterLink>
     <div class="house-details__all">
@@ -121,7 +121,7 @@ function goToEdit(id: number): void {
     align-items: center;
     gap: 10px;
     font-size: 18px;
-    color: #4A4B4C;
+    color: color.$secondary-text-color;
     text-decoration: none;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -172,6 +172,11 @@ function goToEdit(id: number): void {
   &__icon {
     width: 18px;
     height: 18px;
+
+    &.-back {
+      width: 15px;
+      height: 15px;
+    }
   }
 
   .-inside {
@@ -209,11 +214,6 @@ function goToEdit(id: number): void {
   &__list-title {
     font-size: 18px;
     font-weight: bold;
-  }
-
-  &__icon {
-    width: 15px;
-    height: 15px;
   }
 }
 

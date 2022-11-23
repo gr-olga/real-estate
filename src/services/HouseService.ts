@@ -24,19 +24,19 @@ export function createHouse(data: NewHouseType): Promise<AxiosResponse<HouseType
         })
 }
 
-export function addHouseImage(houseId: string, image: string): Promise<AxiosResponse<void>> {
+export function addHouseImage(houseId: number, image: string): Promise<AxiosResponse<void>> {
     return axios.post(`${url}/houses/${houseId}/upload`, {image}, {
         headers: {'X-Api-Key': apiKey}
     });
 }
 
-export function editHouse(houseId: string, data: NewHouseType): Promise<AxiosResponse<HouseType>> {
+export function editHouse(houseId: number, data: NewHouseType): Promise<AxiosResponse<HouseType>> {
     return axios.post(`${url}/houses/${houseId}`, data, {
         headers: {'X-Api-Key': apiKey}
     });
 }
 
-export function deleteHouse(houseId: string): Promise<AxiosResponse<HouseType>> {
+export function deleteHouse(houseId: number): Promise<AxiosResponse<HouseType>> {
     return axios.delete(`${url}/houses/${houseId}`, {
         headers: {'X-Api-Key': apiKey}
     });
