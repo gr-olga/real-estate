@@ -34,17 +34,19 @@ let form: Ref<NewHouseType> = ref({
 onMounted(async () => {
   state.house = await getHouse(route.params.houseId as string);
   if (state.house) {
+    const streetName = (state.house.location.street.match(/[A-z -]+/) as any)[0];
+    const houseNumber = Number((state.house.location.street.match(/[0-9]+/) as any)[0]);
+    const numberAddition = (state.house.location.street.match(/[0-9]+[A-z]+/) as any)[0].match(/[A-z]+/)[0]
+
     form.value = {
       ...form.value,
       price: state.house.price,
       bedrooms: state.house.rooms.bedrooms,
       bathrooms: state.house.rooms.bathrooms,
       size: state.house.size,
-      streetName: state.house.location.street,
-      //todo guess it's better to use regex here
-      houseNumber: Number(state.house.location.street.split(" ")[1]),
-      //todo no number yet
-      numberAddition: "",
+      streetName,
+      houseNumber,
+      numberAddition,
       zip: state.house.location.zip,
       city: state.house.location.city,
       constructionYear: state.house.constructionYear,

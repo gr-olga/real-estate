@@ -10,7 +10,7 @@ const form: Ref<NewHouseType> = ref({
   bathrooms: "" as any,
   size: "" as any,
   streetName: "",
-  houseNumber: "",
+  houseNumber: 0,
   numberAddition: "",
   zip: "",
   city: "",
