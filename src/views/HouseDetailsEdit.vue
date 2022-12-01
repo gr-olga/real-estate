@@ -185,7 +185,7 @@ async function handleSubmit(): Promise<void> {
                    class="house-create__input -construction-date"
                    v-model="form.constructionYear"
                    placeholder="e.g. 1990"
-                   min="1600"
+                   min="1901"
                    required/>
           </label>
           <label class="house-create__label">
