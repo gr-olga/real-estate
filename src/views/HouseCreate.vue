@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Ref, ref} from "vue";
+import {reactive, Ref, ref} from "vue";
 import type {NewHouseType} from "@/models/NewHouseType";
 import {addHouseImage, createHouse} from "@/services/HouseService";
 import router from "@/router";
@@ -23,6 +23,12 @@ let image = ref(null as any)
 
 function onAddFile($event: Event): void {
   image.value = ($event.target as any).files[0];
+
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    image.value = reader.result;
+  });
+  reader.readAsDataURL(image.value);
 }
 
 async function handleSubmit(): Promise<void> {
@@ -91,10 +97,11 @@ async function handleSubmit(): Promise<void> {
             <input type="file"
                    class="house-create__input -image"
                    alt="house"
+                   accept="image/jpeg, image/png, image/jpg"
                    @change="onAddFile"
                    required/>
           </label>
-          <img v-if="image" :src="image" alt="Uploaded House image"/>
+          <img v-if="image" :src="image" class="house-create__preview" alt="Uploaded House image"/>
         </label>
 
         <label class="house-create__label">
@@ -247,6 +254,11 @@ async function handleSubmit(): Promise<void> {
     border: white 1px solid;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
+  }
+
+  &__preview {
+    max-width: 76px;
+    max-height: 76px;
   }
 
   .drop {
