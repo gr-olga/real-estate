@@ -1,25 +1,12 @@
 <script setup lang="ts">
 import Item from "@/components/Item.vue";
-import {HouseType} from "@/models/HouseType";
-import {computed, onMounted, reactive} from "vue";
+import {computed} from "vue";
 import router from "@/router";
 import {useRoute} from "vue-router";
 import {store} from "@/store";
 import {isMyItem} from "@/utils/utils";
 
 const route = useRoute();
-
-// interface EditState {
-//   house: HouseType | undefined
-// }
-//
-// const state: EditState = reactive({
-//   house: undefined
-// })
-
-// onMounted(() => {
-//   state.house = store.state.houses.find((house) => String(house.id) === String(route.params.houseId))
-// });
 
 const house = computed(() => store.state.houses.find((house) => String(house.id) === String(route.params.houseId)))
 

@@ -2,7 +2,7 @@
 import {HouseType} from "@/models/HouseType";
 import {onMounted, reactive, Ref, ref} from "vue";
 import type {NewHouseType} from "@/models/NewHouseType";
-import {addHouseImage, editHouse} from "@/services/HouseService";
+import {addHouseImage, editHouse, getHouse} from "@/services/HouseService";
 import {store} from "@/store";
 import {useRoute} from 'vue-router'
 import router from "@/router";
@@ -32,8 +32,8 @@ let form: Ref<NewHouseType> = ref({
   description: ""
 })
 
-onMounted(() => {
-  state.house = store.state.houses.find((house) => String(house.id) === String(route.params.houseId))
+onMounted(async () => {
+  state.house = await getHouse(route.params.houseId as string);
   if (state.house) {
     form.value = {
       ...form.value,
@@ -192,10 +192,10 @@ async function handleSubmit(): Promise<void> {
             <span class="house-create__label-text">Description*</span>
             <textarea
                 rows="7"
-                   class="house-create__input -description"
-                   v-model="form.description"
-                   placeholder="Enter description"
-                   required/>
+                class="house-create__input -description"
+                v-model="form.description"
+                placeholder="Enter description"
+                required/>
           </label>
           <button class="house-create__post" type="submit">Save</button>
         </form>

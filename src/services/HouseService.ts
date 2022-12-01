@@ -1,5 +1,5 @@
-import axios from "axios";
 import type {AxiosResponse} from "axios";
+import axios from "axios";
 import type {HouseType} from "@/models/HouseType";
 import type {NewHouseType} from "@/models/NewHouseType";
 import {store} from "@/store";
@@ -11,6 +11,12 @@ export function getHouses(): Promise<AxiosResponse<ReadonlyArray<HouseType>>> {
     return axios.get(`${url}/houses`, {
         headers: {'X-Api-Key': apiKey}
     });
+}
+
+export async function getHouse(id: string): Promise<HouseType | undefined> {
+    const res = await getHouses();
+    store.commit('setHouses', res.data);
+    return store.state.houses.find((house) => String(house.id) === id)
 }
 
 export function createHouse(data: NewHouseType): Promise<AxiosResponse<HouseType>> {
