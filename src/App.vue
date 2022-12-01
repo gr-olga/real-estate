@@ -2,7 +2,17 @@
 import {RouterView} from 'vue-router'
 import Header from "@/components/Header.vue";
 import Popup from "@/components/Popup.vue";
-import {store} from "@/store";</script>
+import {store} from "@/store";
+import {getHouses} from "@/services/HouseService";
+
+getHouses().then((res) => {
+  store.commit('setHouses', res.data)
+}).catch((e) => {
+  console.error('Error fetching Houses');
+})
+
+</script>
+
 
 <template>
   <Header/>

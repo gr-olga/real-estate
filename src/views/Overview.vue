@@ -1,7 +1,6 @@
 <script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 import Item from "@/components/Item.vue";
 import {computed, reactive, ref} from "vue";
-import {getHouses} from "@/services/HouseService";
 import type {HouseType} from "@/models/HouseType";
 import {store} from "@/store";
 import Empty from "@/components/Empty.vue";
@@ -12,14 +11,8 @@ interface OverviewState {
   sortBy: 'price' | 'size' | ''
 }
 
-const state = reactive({
+const state: OverviewState = reactive({
   sortBy: ''
-})
-
-getHouses().then((res) => {
-  store.commit('setHouses', res.data)
-}).catch((e) => {
-  console.error('Error fetching Houses');
 })
 
 const filteredHouses = computed(() => {

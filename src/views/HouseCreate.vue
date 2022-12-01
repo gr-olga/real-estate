@@ -173,6 +173,7 @@ async function handleSubmit(): Promise<void> {
 <style scoped lang="scss">
 @use '@/assets/_colors.scss' as color;
 
+
 .box {
   display: flex;
   flex-direction: column;
