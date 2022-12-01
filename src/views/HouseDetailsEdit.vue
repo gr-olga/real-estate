@@ -22,7 +22,7 @@ let form: Ref<NewHouseType> = ref({
   bathrooms: 0,
   size: 0,
   streetName: "",
-  houseNumber: "",
+  houseNumber: 0,
   numberAddition: "",
   zip: "",
   city: "",
@@ -42,7 +42,7 @@ onMounted(async () => {
       size: state.house.size,
       streetName: state.house.location.street,
       //todo guess it's better to use regex here
-      houseNumber: state.house.location.street.split(" ")[1],
+      houseNumber: Number(state.house.location.street.split(" ")[1]),
       //todo no number yet
       numberAddition: "",
       zip: state.house.location.zip,
@@ -60,6 +60,7 @@ function onAddFile($event: Event): void {
 }
 
 async function handleSubmit(): Promise<void> {
+  console.log(111);
   await editHouse(Number(route.params.houseId), form.value)
   const {houseId} = (route.params as any)
   await addHouseImage(houseId, image.value);
@@ -74,7 +75,7 @@ async function handleSubmit(): Promise<void> {
       <div class="house-create">
         <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
         <h1 class="house-create__title">Edit listing</h1>
-        <form name="add-house" class="house-create__form" @submit.prevent="handleSubmit">
+        <form name="edit-house" class="house-create__form" @submit.prevent="handleSubmit">
           <label class="house-create__label">
             <span class="house-create__label-text">Street name*</span>
             <input
