@@ -3,7 +3,6 @@ import {HouseType} from "@/models/HouseType";
 import {onMounted, reactive, Ref, ref} from "vue";
 import type {NewHouseType} from "@/models/NewHouseType";
 import {addHouseImage, editHouse, getHouse} from "@/services/HouseService";
-import {store} from "@/store";
 import {useRoute} from 'vue-router'
 import router from "@/router";
 
@@ -88,7 +87,7 @@ async function handleSubmit(): Promise<void> {
           <div class="house-create__box">
             <label class="house-create__label">
               <span class="house-create__label-text">House number*</span>
-              <input type="text"
+              <input type="number"
                      class="house-create__input -house-number -double"
                      v-model="form.houseNumber"
                      placeholder="Enter house number"

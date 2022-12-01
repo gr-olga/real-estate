@@ -55,7 +55,7 @@ async function handleSubmit(): Promise<void> {
         <div class="house-create__box">
           <label class="house-create__label">
             <span class="house-create__label-text">House number*</span>
-            <input type="text"
+            <input type="number"
                    class="house-create__input -house-number -double"
                    v-model="form.houseNumber"
                    placeholder="Enter house number"

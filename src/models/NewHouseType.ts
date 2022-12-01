@@ -4,7 +4,7 @@ export interface NewHouseType {
     readonly bathrooms: number,
     readonly size: number,
     readonly streetName: string,
-    readonly houseNumber: string,
+    readonly houseNumber: number,
     readonly numberAddition: string,
     readonly zip: string,
     readonly city: string,

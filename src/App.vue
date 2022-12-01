@@ -10,9 +10,7 @@ getHouses().then((res) => {
 }).catch((e) => {
   console.error('Error fetching Houses');
 })
-
 </script>
-
 
 <template>
   <Header/>
