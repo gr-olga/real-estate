@@ -6,11 +6,10 @@ import {store} from "@/store";
 
 const url = 'https://api.intern.d-tt.nl/api';
 const apiKey = 'iF_fYVo57x819kDR6vZAzj-XtsJmgeCU'
+const config = {headers: {'X-Api-Key': apiKey}}
 
 export function getHouses(): Promise<AxiosResponse<ReadonlyArray<HouseType>>> {
-    return axios.get(`${url}/houses`, {
-        headers: {'X-Api-Key': apiKey}
-    });
+    return axios.get(`${url}/houses`, config);
 }
 
 export async function getHouse(id: string): Promise<HouseType | undefined> {
@@ -21,9 +20,7 @@ export async function getHouse(id: string): Promise<HouseType | undefined> {
 
 export function createHouse(data: NewHouseType): Promise<AxiosResponse<HouseType>> {
     return axios
-        .post(`${url}/houses`, data, {
-            headers: {'X-Api-Key': apiKey}
-        })
+        .post(`${url}/houses`, data, config)
         .then((res: AxiosResponse<HouseType>) => {
             store.commit('setHouse', res.data)
             return res;
@@ -31,19 +28,13 @@ export function createHouse(data: NewHouseType): Promise<AxiosResponse<HouseType
 }
 
 export function addHouseImage(houseId: number, image: string): Promise<AxiosResponse<void>> {
-    return axios.post(`${url}/houses/${houseId}/upload`, {image}, {
-        headers: {'X-Api-Key': apiKey}
-    });
+    return axios.post(`${url}/houses/${houseId}/upload`, {image}, config);
 }
 
 export function editHouse(houseId: number, data: NewHouseType): Promise<AxiosResponse<HouseType>> {
-    return axios.post(`${url}/houses/${houseId}`, data, {
-        headers: {'X-Api-Key': apiKey}
-    });
+    return axios.post(`${url}/houses/${houseId}`, data, config);
 }
 
 export function deleteHouse(houseId: number): Promise<AxiosResponse<HouseType>> {
-    return axios.delete(`${url}/houses/${houseId}`, {
-        headers: {'X-Api-Key': apiKey}
-    });
+    return axios.delete(`${url}/houses/${houseId}`, config);
 }
