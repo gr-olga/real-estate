@@ -59,6 +59,12 @@ let image = ref(null as any)
 
 function onAddFile($event: Event): void {
   image.value = ($event.target as any).files[0];
+
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    image.value = reader.result;
+  });
+  reader.readAsDataURL(image.value);
 }
 
 async function handleSubmit(): Promise<void> {
@@ -129,7 +135,7 @@ async function handleSubmit(): Promise<void> {
                      @change="onAddFile"
                      required/>
             </label>
-            <img v-if="image" :src="image" alt="Uploaded House image"/>
+          <img v-if="image" :src="image" class="house-create__preview" alt="Uploaded House image"/>
           </label>
 
           <label class="house-create__label">
@@ -282,6 +288,11 @@ async function handleSubmit(): Promise<void> {
     font-size: 14px;
   }
 
+  &__preview {
+    max-width: 76px;
+    max-height: 76px;
+  }
+
   .drop {
     align-self: flex-start;
   }
@@ -301,7 +312,7 @@ async function handleSubmit(): Promise<void> {
     .-image[type=file]::file-selector-button {
       margin-right: 20px;
       border: none;
-      background: #084cdf;
+      background: #084CDF;
       padding: 10px 20px;
       border-radius: 10px;
       color: #fff;
