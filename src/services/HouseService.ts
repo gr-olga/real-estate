@@ -5,7 +5,7 @@ import type {NewHouseType} from "@/models/NewHouseType";
 import {store} from "@/store";
 
 const url = 'https://api.intern.d-tt.nl/api';
-const apiKey = 'iF_fYVo57x819kDR6vZAzj-XtsJmgeCU'
+const apiKey = 'N9d31-u7ge5P0iFyoJtfGUvpOWKsw_xC'
 const config = {headers: {'X-Api-Key': apiKey}}
 
 export function getHouses(): Promise<AxiosResponse<ReadonlyArray<HouseType>>> {

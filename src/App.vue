@@ -4,6 +4,7 @@ import Header from "@/components/Header.vue";
 import Popup from "@/components/Popup.vue";
 import {store} from "@/store";
 import {getHouses} from "@/services/HouseService";
+import Footer from "@/components/Footer.vue";
 
 getHouses().then((res) => {
   store.commit('setHouses', res.data)
@@ -13,27 +14,48 @@ getHouses().then((res) => {
 </script>
 
 <template>
-  <Header/>
+  <Header class="header"/>
   <div class="app">
     <RouterView/>
   </div>
   <Popup v-if="store.state.isPopupOpen"/>
+  <Footer class="footer"/>
 </template>
 
 <style scoped lang="scss">
 @use '@/assets/_colors.scss' as color;
 
+$breakpoint: 768px;
+
 .app {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: color.$background1-element-color;
   width: 100%;
+  flex: 1;
 }
 
-.header {
-  padding-top: 20px;
-  padding-bottom: 20px;
+.footer {
+  display: none;
+}
+
+@media (max-width: $breakpoint) {
+  .header {
+    display: none;
+  }
+
+  .footer {
+    display: flex;
+  }
+
+}
+</style>
+
+<style lang="scss">
+.app-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 </style>

@@ -101,7 +101,12 @@ async function handleSubmit(): Promise<void> {
                    @change="onAddFile"
                    required/>
           </label>
-          <img v-if="image" :src="image" class="house-create__preview" alt="Uploaded House image"/>
+          <img v-if="image"
+               :src="image"
+               class="house-create__preview"
+               alt="Uploaded House image"
+               key="secondImage" rel="preload"
+          />
         </label>
 
         <label class="house-create__label">
@@ -352,5 +357,4 @@ async function handleSubmit(): Promise<void> {
     cursor: pointer;
   }
 }
-
 </style>

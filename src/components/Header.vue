@@ -59,5 +59,4 @@
   color: color.$primary-text-color;
   font-weight: bold;
 }
-
 </style>

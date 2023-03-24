@@ -1,1 +1,36 @@
-{iF_fYVo57x819kDR6vZAzj-XtsJmgeCU}
+{N9d31-u7ge5P0iFyoJtfGUvpOWKsw_xC}
+
+
+
+Feedback
+
+Overall it is a good try, but the app seems a bit untested. In addition, it does not entirely follow the workflow. The app is not responsive at all, which is a requirement.
+
+UI
+
+When I refresh the house detail page, nothing is displayed. The same happens in the edit house page.
+
+Create house - When selecting an image, the image is not properly previewed. (see here)
+
+Edit house - When editing a house, the image is not set in the preview. (see here)
+
+The delete modal should be located in the detail page. Make sure to follow a given workflow.
+
+Houses list: The photo is the same for all the houses.
+
+Structure
+
+The store is not entirely utilised. We usually use the actions to make make API calls and receive data, which is committed to the store.
+
+Logic
+
+Create/edit house: The API has a min value for the construction year, so the house is not really created sometimes.
+
+Create/edit: The address is not properly parsed into the input fields (e.g. street number and addition).
+
+Create house: After creating a house, I am redirected to a blank page.
+
+Edit house: I am not able to save the house, whose details I didn't even change. (see here).
+
+Create/edit form: The validation is not sufficient, e.g. street number can be letters.
+
