@@ -150,4 +150,33 @@ function handleOpen(id: number): void {
   background: transparent;
   cursor: pointer;
 }
+
+$breakpoint: 768px;
+@media (max-width: $breakpoint) {
+  .item {
+    padding: 0;
+
+    &__details-img {
+      height: 90px;
+      width: 90px;
+    }
+
+    &__details-address {
+      font-size: 14px;
+    }
+
+    &__details-price {
+      font-size: 12px;
+    }
+
+    &__details-zip {
+      font-size: 12px;
+    }
+
+    &__details-box {
+      gap: 10px;
+      margin-top: 5px;
+    }
+  }
+}
 </style>
