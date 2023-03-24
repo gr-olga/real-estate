@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {reactive, Ref, ref} from "vue";
+import {Ref, ref} from "vue";
 import type {NewHouseType} from "@/models/NewHouseType";
 import {addHouseImage, createHouse} from "@/services/HouseService";
 import router from "@/router";
@@ -45,7 +45,7 @@ async function handleSubmit(): Promise<void> {
         <img src="@/assets/images/ic_back_grey@3x.png"
              alt="back arrow"
              class="house-create__icon -back "/>
-        Back to overview
+        <h4 class="house-create__back-title"> Back to overview</h4>
       </RouterLink>
       <h1 class="house-create__title">Create new listing</h1>
       <form name="add-house" class="house-create__form" @submit.prevent="handleSubmit">
@@ -203,7 +203,6 @@ async function handleSubmit(): Promise<void> {
   align-items: flex-start;
 
   &__back {
-    font-size: 18px;
     color: color.$secondary-text-color;
     margin-top: 20px;
     text-decoration: none;
@@ -211,7 +210,11 @@ async function handleSubmit(): Promise<void> {
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    font-weight: bold;
+
+    &-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
   }
 
   &__icon {
@@ -355,6 +358,40 @@ async function handleSubmit(): Promise<void> {
     align-self: flex-end;
     margin-top: 20px;
     cursor: pointer;
+  }
+}
+
+$breakpoint: 468px;
+@media (max-width: $breakpoint) {
+  .house-create__back-title {
+    display: none;
+  }
+  .house-create__back {
+    align-self: flex-start;
+    margin-left: 15px;
+  }
+
+
+  .house-create__title {
+    align-self: center;
+    margin: auto;
+  }
+
+  .house-create__form {
+    max-width: 350px;
+  }
+  .house-create__post {
+    max-width: none;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+$breakpoint2: 400px;
+@media (max-width: $breakpoint2) {
+  .house-create {
+    width: 100%;
+    align-items: center;
   }
 }
 </style>
