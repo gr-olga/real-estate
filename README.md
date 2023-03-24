@@ -1,6 +1,5 @@
 # dtt
-Tech assessment for DTT
-real estate website
+DTT real estate website
 
 use: Vue3, Vuex, TypeScript, SCSS
 
