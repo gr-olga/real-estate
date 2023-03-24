@@ -32,15 +32,20 @@ const sortHouses = computed(() => {
     <div class="overview__line">
       <h1 class="overview__title">Houses</h1>
       <RouterLink to="/house-create" class="overview__create-btn">
-        <button type="button" class="overview__create-btn">
+        <button type="button" class="overview__create-btn-normal">
           <img src="@/assets/images/ic_plus_white@3x.png"
                alt="add icon"
                class="overview__img"/>
           Create new
         </button>
+        <button type="button" class="overview__create-btn-mobile">
+          <img src="@/assets/images/ic_plus_grey@3x.png"
+               alt="add icon"
+               class="overview__img"/>
+        </button>
       </RouterLink>
     </div>
-    <div class="overview__line">
+    <div class="overview__line line-search">
       <input class="overview__search" type="search" placeholder="Search for a house" v-model="searchInput"/>
       <div class="overview__sort">
         <button type="button" class="overview__sort-btn"
@@ -134,7 +139,7 @@ const sortHouses = computed(() => {
     border-radius: 5px;
     border: color.$tertiary-element-color1 1px solid;
     max-width: 550px;
-    min-width: 300px;
+    min-width: 330px;
     padding: 10px;
 
   }
@@ -147,5 +152,54 @@ const sortHouses = computed(() => {
   &__items-box {
     width: 100%;
   }
+}
+
+$breakpoint: 768px;
+
+@media (max-width: $breakpoint) {
+
+  .overview__line {
+    align-items: center;
+  }
+
+  .overview__create-btn {
+    display: flex;
+    background-color: transparent;
+    border: none;
+    max-width: 35px;
+    max-height: 35px;
+    cursor: pointer;
+    flex-direction: row;
+    min-width: 35px;
+
+    &-normal {
+      display: none;
+    }
+
+    &-mobile {
+      border: none;
+      background: transparent;
+    }
+  }
+  .overview__title {
+    margin: auto;
+  }
+  .line-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .overview__sort {
+    display: flex;
+    flex-direction: row;
+    min-width: 330px;
+
+    &-btn {
+      min-width: 165px;
+      margin-top: 15px;
+    }
+  }
+
+
 }
 </style>
