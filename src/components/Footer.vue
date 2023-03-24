@@ -5,23 +5,16 @@
           class="footer__links-item"
           to="/"
           exact
-          active-class="current"
+          active-class="current-home"
       >
-        <div  class="footer__img-home"></div>
-        <img
-            class="footer__img-home"
-            src="@/assets/images/ic_mobile_navigarion_home@3x.png"
-            alt="home"/>
+        <button class="footer__img-home"/>
       </RouterLink>
       <RouterLink
           class="footer__links-item"
           to="/about"
           active-class="current"
       >
-        <img
-            class="footer__img"
-            src="@/assets/images/ic_mobile_navigarion_info@3x.png"
-            alt="about">
+        <button class="footer__img"/>
       </RouterLink>
     </div>
   </footer>
@@ -37,16 +30,43 @@
 
   &__container {
     display: flex;
+    align-items: center;
     flex-direction: row;
     justify-content: space-between;
     margin-left: 35px;
     margin-right: 35px;
+    width: 100%;
+    height: 60px;
   }
+
   &__img {
-    max-width: 35px;
+    width: 35px;
+    height: 35px;
+    background-image: url("@/assets/images/ic_mobile_navigarion_info@3x.png");
+    background-size: 35px;
+    border: none;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
   }
+
   &__img-home {
-    max-width: 40px;
+    width: 40px;
+    height: 40px;
+    background-image: url("@/assets/images/ic_mobile_navigarion_home@3x.png");
+    background-size: 40px;
+    border: none;
+    background-color: white;
+    background-repeat: no-repeat;
   }
 }
+
+.current-home {
+  background-image: url("@/assets/images/ic_mobile_navigarion_home_active@3x.png");
+}
+
+.current {
+  background-image: url("@/assets/images/ic_mobile_navigarion_info_active@3x.png");
+}
+
 </style>
