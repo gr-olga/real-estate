@@ -5,15 +5,16 @@ import router from "@/router";
 import { useRoute } from "vue-router";
 import { store } from "@/store";
 import { isMyItem } from "@/utils/utils";
-import type {ComputedRef} from "@vue/reactivity";
-import type {HouseType} from "@/models/HouseType";
+import type { ComputedRef } from "vue";
+import type { HouseType } from "@/models/HouseType";
 
 const route = useRoute();
 
-const house: ComputedRef<HouseType> = computed(() =>
-  store.state.houses.find(
-    (house) => String(house.id) === String(route.params.houseId)
-  ) as HouseType
+const house: ComputedRef<HouseType> = computed(
+  () =>
+    store.state.houses.find(
+      (house) => String(house.id) === String(route.params.houseId)
+    ) as HouseType
 );
 
 function goToEdit(id: number): void {
