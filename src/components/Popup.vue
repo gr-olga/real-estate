@@ -92,4 +92,22 @@ function handleClose(): void {
     margin-top: 10px;
   }
 }
+
+$breakpoint: 468px;
+@media (max-width: $breakpoint) {
+  .popup__box {
+    max-width: 360px;
+  }
+  .popup__title {
+    font-size: 24px;
+  }
+  .popup__text {
+    font-size: 14px;
+    max-width: 80%;
+  }
+  .popup__btn {
+    font-size: 14px;
+  }
+}
+
 </style>
