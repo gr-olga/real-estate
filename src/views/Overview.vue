@@ -1,74 +1,93 @@
-<script setup lang="ts" xmlns="http://www.w3.org/1999/html">
+<script setup lang="ts">
 import Item from "@/components/Item.vue";
-import {computed, reactive, ref} from "vue";
-import type {HouseType} from "@/models/HouseType";
-import {store} from "@/store";
+import { computed, reactive, ref } from "vue";
+import type { HouseType } from "@/models/HouseType";
+import { store } from "@/store";
 import Empty from "@/components/Empty.vue";
 
 let searchInput = ref("");
 
 interface OverviewState {
-  sortBy: 'price' | 'size' | ''
+  sortBy: "price" | "size" | "";
 }
 
 const state: OverviewState = reactive({
-  sortBy: ''
-})
+  sortBy: "",
+});
 
 const filteredHouses = computed(() => {
-  return [...store.state.houses].filter(({location}: HouseType) => {
-    const searchBy = `${location.street} ${location.city} ${location.zip}`.toLowerCase();
-    return searchBy.includes(searchInput.value.toLowerCase())
-  })
-})
+  return [...store.state.houses].filter(({ location }: HouseType) => {
+    const searchBy =
+      `${location.street} ${location.city} ${location.zip}`.toLowerCase();
+    return searchBy.includes(searchInput.value.toLowerCase());
+  });
+});
 
 const sortHouses = computed(() => {
-  return [...filteredHouses.value].sort((a: HouseType, b: HouseType) => (a as any)[state.sortBy] - (b as any)[state.sortBy])
-})
+  return [...filteredHouses.value].sort(
+    (a: HouseType, b: HouseType) =>
+      (a as any)[state.sortBy] - (b as any)[state.sortBy]
+  );
+});
 </script>
 
 <template>
   <div class="overview">
     <div class="overview__line">
       <h1 class="overview__title">Houses</h1>
-      <RouterLink to="/house-create" class="overview__create-btn">
-        <button type="button" class="overview__create-btn-normal">
-          <img src="@/assets/images/ic_plus_white@3x.png"
-               alt="add icon"
-               class="overview__img"/>
-          <h3 class="overview__create-btn-text"> Create new </h3>
+      <RouterLink class="overview__create-btn" to="/house-create">
+        <button class="overview__create-btn-normal" type="button">
+          <img
+            alt="add icon"
+            class="overview__img"
+            src="@/assets/images/ic_plus_white@3x.png"
+          />
+          <h3 class="overview__create-btn-text">Create new</h3>
         </button>
-        <button type="button" class="overview__create-btn-mobile">
-          <img src="@/assets/images/ic_plus_grey@3x.png"
-               alt="add icon"
-               class="overview__img"/>
+        <button class="overview__create-btn-mobile" type="button">
+          <img
+            alt="add icon"
+            class="overview__img"
+            src="@/assets/images/ic_plus_grey@3x.png"
+          />
         </button>
       </RouterLink>
     </div>
     <div class="overview__line line-search">
-      <input class="overview__search" type="search" placeholder="Search for a house" v-model="searchInput"/>
+      <input
+        v-model="searchInput"
+        class="overview__search"
+        placeholder="Search for a house"
+        type="search"
+      />
       <div class="overview__sort">
-        <button type="button" class="overview__sort-btn"
-                @click="state.sortBy = 'price'"
-                :class="{'-active': state.sortBy === 'price'}">
+        <button
+          :class="{ '-active': state.sortBy === 'price' }"
+          class="overview__sort-btn"
+          type="button"
+          @click="state.sortBy = 'price'"
+        >
           Price
         </button>
-        <button type="button" class="overview__sort-btn"
-                @click="state.sortBy = 'size'"
-                :class="{'-active': state.sortBy === 'size'}">
+        <button
+          :class="{ '-active': state.sortBy === 'size' }"
+          class="overview__sort-btn"
+          type="button"
+          @click="state.sortBy = 'size'"
+        >
           Size
         </button>
       </div>
     </div>
     <div class="overview__items-box">
-      <Empty v-if="sortHouses.length === 0"/>
-      <Item v-for="house in sortHouses" :house="house"/>
+      <Empty v-if="sortHouses.length === 0" />
+      <Item v-for="house in sortHouses" :key="house.id" :house="house" />
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-@use '@/assets/_colors.scss' as color;
+<style lang="scss" scoped>
+@use "@/assets/_colors.scss" as color;
 
 .overview {
   width: 80%;
@@ -153,7 +172,6 @@ const sortHouses = computed(() => {
     max-width: 550px;
     min-width: 330px;
     padding: 10px;
-
   }
 
   &__img {
@@ -169,7 +187,6 @@ const sortHouses = computed(() => {
 $breakpoint: 768px;
 
 @media (max-width: $breakpoint) {
-
   .overview__line {
     align-items: center;
   }
@@ -212,8 +229,5 @@ $breakpoint: 768px;
       margin-top: 15px;
     }
   }
-
 }
 </style>
-
-

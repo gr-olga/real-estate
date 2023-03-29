@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import type {HouseType} from "@/models/HouseType";
+import type { HouseType } from "@/models/HouseType";
 import router from "@/router";
-import {store} from "@/store";
-import {isMyItem} from "@/utils/utils";
+import { store } from "@/store";
+import { isMyItem } from "@/utils/utils";
 
 defineProps<{
-  house: HouseType
-}>()
+  house: HouseType;
+}>();
 
 function goToEdit(id: number): void {
-  router.push(`/edit/${id}`)
+  router.push(`/edit/${id}`);
 }
 
 function goToDetails(id: number): void {
-  router.push(`/house-details/${id}`)
+  router.push(`/house-details/${id}`);
 }
 
 function handleOpen(id: number): void {
-  store.commit('setTogglePopup')
-  store.commit('setId', id)
+  store.commit("setTogglePopup");
+  store.commit("setId", id);
 }
 </script>
 
@@ -26,41 +26,75 @@ function handleOpen(id: number): void {
   <div class="item" v-if="house">
     <div class="item__details">
       <button @click="goToDetails(house.id)" class="item__detail-link">
-        <img class="item__details-img" src="@/assets/images/img_placeholder_house@3x.png" alt="house"/>
+        <img
+          class="item__details-img"
+          src="@/assets/images/img_placeholder_house@3x.png"
+          alt="house"
+        />
       </button>
       <div class="item__details-info">
-        <h3 class="item__details-address" @click="goToDetails(house.id)">{{ house.location.street }}</h3>
+        <h3 class="item__details-address" @click="goToDetails(house.id)">
+          {{ house.location.street }}
+        </h3>
         <div class="item__details-price">€ {{ house.price }}</div>
         <div class="item__details-zip">{{ house.location.zip }}</div>
         <div class="item__details-box">
           <div class="item__detail-box-item">
-            <img class="item__details-icon" src="@/assets/images/ic_bed@3x.png" alt="bed">
+            <img
+              class="item__details-icon"
+              src="@/assets/images/ic_bed@3x.png"
+              alt="bed"
+            />
             <div>{{ house.rooms.bedrooms }}</div>
           </div>
           <div class="item__detail-box-item">
-            <img class="item__details-icon" src="@/assets/images/ic_bath@3x.png" alt="bed">
+            <img
+              class="item__details-icon"
+              src="@/assets/images/ic_bath@3x.png"
+              alt="bed"
+            />
             <div>{{ house.rooms.bathrooms }}</div>
           </div>
           <div class="item__detail-box-item">
-            <img class="item__details-icon" src="@/assets/images/ic_size@3x.png" alt="bed">
+            <img
+              class="item__details-icon"
+              src="@/assets/images/ic_size@3x.png"
+              alt="bed"
+            />
             <div>{{ house.size }}</div>
           </div>
         </div>
       </div>
     </div>
     <div class="item__actions" v-if="isMyItem(house.id)">
-      <button @click="goToEdit(house.id)" class="item__action -edit" type="button">
-        <img class="item__action-icon" src="@/assets/images/ic_edit@3x.png" alt="edit">
+      <button
+        @click="goToEdit(house.id)"
+        class="item__action -edit"
+        type="button"
+      >
+        <img
+          class="item__action-icon"
+          src="@/assets/images/ic_edit@3x.png"
+          alt="edit"
+        />
       </button>
-      <button class="item__action -remove" type="button" @click="handleOpen(house.id)">
-        <img class="item__action-icon" src="@/assets/images/ic_delete@3x.png" alt="bin">
+      <button
+        class="item__action -remove"
+        type="button"
+        @click="handleOpen(house.id)"
+      >
+        <img
+          class="item__action-icon"
+          src="@/assets/images/ic_delete@3x.png"
+          alt="bin"
+        />
       </button>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/_colors.scss' as color;
+@use "@/assets/_colors.scss" as color;
 
 .item {
   display: flex;

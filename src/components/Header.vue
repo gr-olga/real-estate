@@ -1,21 +1,25 @@
 <template>
   <header class="header">
     <div class="header__container">
-      <img class="header__img" src="@/assets/images/img_logo_dtt@3x.png" alt="DTT">
+      <img
+        class="header__img"
+        src="@/assets/images/img_logo_dtt@3x.png"
+        alt="DTT"
+      />
       <div class="header__links">
         <RouterLink
-            class="header__links-item"
-            to="/"
-            exact
-            active-class="current"
+          class="header__links-item"
+          to="/"
+          exact
+          active-class="current"
         >
           Houses
         </RouterLink>
         <RouterLink
-            class="header__links-item"
-            to="/about"
-            active-class="current"
-        >About
+          class="header__links-item"
+          to="/about"
+          active-class="current"
+          >About
         </RouterLink>
       </div>
     </div>
@@ -23,7 +27,7 @@
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/_colors.scss' as color;
+@use "@/assets/_colors.scss" as color;
 
 .header {
   background-color: white;

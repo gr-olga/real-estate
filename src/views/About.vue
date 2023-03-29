@@ -1,23 +1,27 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div class="about">
     <p class="about__mobile-title">About</p>
     <h1 class="about__title">About DTT real estate</h1>
-    <p class="about__paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-      sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <p class="about__paragraph">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
     </p>
-    <p class="about__paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <p class="about__paragraph">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
     </p>
     <h2 class="about__title">Design and Development</h2>
     <div class="about__addition">
-      <img src="@/assets/images/img_logo_dtt@3x.png" alt="logo" class="about__logo">
+      <img
+        alt="logo"
+        class="about__logo"
+        src="@/assets/images/img_logo_dtt@3x.png"
+      />
       <div class="about__link">
         <span class="about__link-title"> By DTT</span>
         <a class="about__link-url">www.d-tt.nl</a>
@@ -26,8 +30,8 @@
   </div>
 </template>
 
-<style scoped lang="scss">
-@use '@/assets/_colors.scss' as color;
+<style lang="scss" scoped>
+@use "@/assets/_colors.scss" as color;
 
 .about {
   height: 100%;
@@ -51,7 +55,7 @@
   }
 
   &__paragraph {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 18px;
     margin-top: 15px;
     margin-bottom: 20px;
@@ -83,7 +87,6 @@
   }
 }
 
-
 $breakpoint: 768px;
 
 @media (max-width: $breakpoint) {
@@ -109,7 +112,6 @@ $breakpoint: 768px;
     &__logo {
       width: 100px;
     }
-
   }
 }
 </style>

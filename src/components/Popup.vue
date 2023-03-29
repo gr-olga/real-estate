@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import {store} from "@/store";
-import {deleteHouse, getHouses} from "@/services/HouseService";
+import { store } from "@/store";
+import { deleteHouse, getHouses } from "@/services/HouseService";
 import router from "@/router";
 
 async function handleDelete(): Promise<void> {
-  await deleteHouse(store.state.id)
-  const res = await getHouses()
-  store.commit('setHouses', res.data)
-  store.commit('setTogglePopup')
-  router.push('/')
+  await deleteHouse(store.state.id);
+  const res = await getHouses();
+  store.commit("setHouses", res.data);
+  store.commit("setTogglePopup");
+  router.push("/");
 }
 
 function handleClose(): void {
-  store.commit('setTogglePopup')
+  store.commit("setTogglePopup");
 }
 </script>
 
@@ -20,7 +20,10 @@ function handleClose(): void {
   <div class="popup">
     <div class="popup__box">
       <h1 class="popup__title">Delete listing</h1>
-      <p class="popup__text">Are you sure you want to delete this listing? This action cannot be undone</p>
+      <p class="popup__text">
+        Are you sure you want to delete this listing? This action cannot be
+        undone
+      </p>
       <button class="popup__btn -yes" @click="handleDelete">Yes, delete</button>
       <button class="popup__btn -no" @click="handleClose">Go back</button>
     </div>
@@ -39,13 +42,13 @@ function handleClose(): void {
   align-items: center;
   z-index: 9;
   background-color: #4a4b4cbf;
-  transition: visibility .35s, opacity 0.35s ease-in-out;
+  transition: visibility 0.35s, opacity 0.35s ease-in-out;
 
   &__box {
     display: flex;
     flex-direction: column;
     max-width: 550px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     margin: auto;
     position: relative;
     align-items: center;
@@ -62,9 +65,9 @@ function handleClose(): void {
   }
 
   &__text {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 18px;
-    color: #4A4B4C;
+    color: #4a4b4c;
     max-width: 65%;
     text-align: center;
     margin-top: 15px;
@@ -82,13 +85,13 @@ function handleClose(): void {
   }
 
   .-yes {
-    background-color: #EB5440;
-    border: #EB5440 1px solid;
+    background-color: #eb5440;
+    border: #eb5440 1px solid;
   }
 
   .-no {
-    background-color: #4A4B4C;
-    border: #4A4B4C 1px solid;
+    background-color: #4a4b4c;
+    border: #4a4b4c 1px solid;
     margin-top: 10px;
   }
 }
@@ -109,5 +112,4 @@ $breakpoint: 468px;
     font-size: 14px;
   }
 }
-
 </style>

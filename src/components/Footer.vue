@@ -2,26 +2,22 @@
   <footer class="footer">
     <div class="footer__container">
       <RouterLink
-          class="footer__links-item"
-          to="/"
-          exact
-          active-class="current-home"
+        class="footer__links-item"
+        to="/"
+        exact
+        active-class="current-home"
       >
-        <button class="footer__img-home"/>
+        <button class="footer__img-home" />
       </RouterLink>
-      <RouterLink
-          class="footer__links-item"
-          to="/about"
-          active-class="current"
-      >
-        <button class="footer__img"/>
+      <RouterLink class="footer__links-item" to="/about" active-class="current">
+        <button class="footer__img" />
       </RouterLink>
     </div>
   </footer>
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/_colors.scss' as color;
+@use "@/assets/_colors.scss" as color;
 
 .footer {
   display: block;
@@ -68,5 +64,4 @@
 .current {
   background-image: url("@/assets/images/ic_mobile_navigarion_info_active@3x.png");
 }
-
 </style>
