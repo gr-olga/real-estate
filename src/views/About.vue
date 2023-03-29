@@ -18,9 +18,9 @@
     <h2 class="about__title">Design and Development</h2>
     <div class="about__addition">
       <img
-        alt="logo"
-        class="about__logo"
-        src="@/assets/images/img_logo_dtt@3x.png"
+          alt="logo"
+          class="about__logo"
+          src="@/assets/images/img_logo_dtt@3x.png"
       />
       <div class="about__link">
         <span class="about__link-title"> By DTT</span>
@@ -41,7 +41,7 @@
   align-items: flex-start;
   color: color.$secondary-text-color;
   max-width: 80%;
-  padding-bottom: 40px;
+  margin-top: 50px;
 
   &__mobile-title {
     display: none;
@@ -91,7 +91,7 @@ $breakpoint: 768px;
 
 @media (max-width: $breakpoint) {
   .about {
-    margin: auto;
+    margin: 50px auto auto;
 
     &__mobile-title {
       display: flex;
