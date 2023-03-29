@@ -107,7 +107,8 @@ const sortHouses = computed(() => {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 45px;
+    margin-bottom: 10px;
   }
 
   &__create-btn {
@@ -176,8 +177,8 @@ const sortHouses = computed(() => {
     min-width: 330px;
     background-image: url("@/assets/images/ic_search@3x.png");
     background-repeat: no-repeat;
-    background-size: 20px;
-    padding: 10px 10px 10px 10px;
+    background-size: 16px;
+    padding: 8px 12px;
     background-origin: content-box;
     text-align: center;
   }

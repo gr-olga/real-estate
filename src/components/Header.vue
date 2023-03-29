@@ -30,7 +30,7 @@
 @use "@/assets/_colors.scss" as color;
 
 .header {
-  min-height: 70px;
+  min-height: 90px;
   background-color: white;
   display: flex;
 
@@ -40,6 +40,7 @@
     flex-direction: row;
     margin: auto;
     align-items: center;
+    gap: 25px;
   }
 
   &__img {
@@ -51,6 +52,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 
     &-item {
       color: color.$tertiary-element-color2;
