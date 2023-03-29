@@ -36,7 +36,7 @@ const sortHouses = computed(() => {
           <img src="@/assets/images/ic_plus_white@3x.png"
                alt="add icon"
                class="overview__img"/>
-          Create new
+          <h3 class="overview__create-btn-text"> Create new </h3>
         </button>
         <button type="button" class="overview__create-btn-mobile">
           <img src="@/assets/images/ic_plus_grey@3x.png"
@@ -97,12 +97,24 @@ const sortHouses = computed(() => {
     border-radius: 7px;
     max-width: 350px;
     min-width: 100px;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
     padding: 7px 10px;
     cursor: pointer;
-    text-transform: uppercase;
+
+    &-normal {
+      background-color: transparent;
+      border: none;
+    }
+
+    &-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    &-mobile {
+      display: none;
+    }
   }
 
   &__sort-btn {
@@ -177,6 +189,7 @@ $breakpoint: 768px;
     }
 
     &-mobile {
+      display: block;
       border: none;
       background: transparent;
     }
@@ -200,6 +213,7 @@ $breakpoint: 768px;
     }
   }
 
-
 }
 </style>
+
+

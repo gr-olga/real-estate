@@ -26,7 +26,7 @@ function handleOpen(id: number): void {
       <img src="@/assets/images/ic_back_grey@3x.png"
            alt="back arrow"
            class="house-details__icon -back "/>
-      Back to overview
+      <h4 class="house-create__back-title"> Back to overview</h4>
     </RouterLink>
     <div class="house-details__all">
       <div class="house-details__item">
@@ -201,6 +201,46 @@ function handleOpen(id: number): void {
   &__list-title {
     font-size: 18px;
     font-weight: bold;
+  }
+}
+
+$breakpoint: 468px;
+@media (max-width: $breakpoint) {
+  .house-details {
+
+    &__all {
+      flex-direction: column;
+    }
+
+    &__item {
+      max-width: 350px;
+    }
+
+    &__item-image {
+      width: 100%;
+    }
+
+    &__list {
+      margin: auto;
+    }
+
+    &__address-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    &__block-text {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    &__list {
+      margin-top: 10px;
+    }
+
+  }
+  .house-create__back-title {
+    display: none;
   }
 }
 

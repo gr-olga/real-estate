@@ -81,7 +81,12 @@ async function handleSubmit(): Promise<void> {
   <div class="background">
     <div class="box">
       <div class="house-create">
-        <RouterLink to="/" class="house-create__back"> ← Back to overview</RouterLink>
+        <RouterLink to="/" class="house-create__back">
+          <img src="@/assets/images/ic_back_grey@3x.png"
+               alt="back arrow"
+               class="house-create__icon -back "/>
+          <h4 class="house-create__back-title">Back to overview </h4>
+        </RouterLink>
         <h1 class="house-create__title">Edit listing</h1>
         <form name="edit-house" class="house-create__form" @submit.prevent="handleSubmit">
           <label class="house-create__label">
@@ -135,7 +140,7 @@ async function handleSubmit(): Promise<void> {
                      @change="onAddFile"
                      required/>
             </label>
-          <img v-if="image" :src="image" class="house-create__preview" alt="Uploaded House image"/>
+            <img v-if="image" :src="image" class="house-create__preview" alt="Uploaded House image"/>
           </label>
 
           <label class="house-create__label">
@@ -229,7 +234,7 @@ async function handleSubmit(): Promise<void> {
 .box {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   justify-content: center;
   align-items: center;
 
@@ -238,15 +243,37 @@ async function handleSubmit(): Promise<void> {
 .house-create {
   display: flex;
   flex-direction: column;
-  max-width: 100%;
+  max-width: 80%;
   align-self: flex-start;
 
   &__back {
-    font-size: 18px;
     color: color.$secondary-text-color;
     margin-top: 20px;
     text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    &-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
   }
+
+  &__icon {
+    &.-back {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  //&__back {
+  //  font-size: 18px;
+  //  color: color.$secondary-text-color;
+  //  margin-top: 20px;
+  //  text-decoration: none;
+  //}
 
   &__title {
     font-size: 18px;
@@ -384,5 +411,42 @@ async function handleSubmit(): Promise<void> {
     cursor: pointer;
   }
 }
+
+$breakpoint: 468px;
+@media (max-width: $breakpoint) {
+  .box{
+    flex-direction: row;
+  }
+  .house-create__back-title {
+    display: none;
+  }
+  .house-create__back {
+    align-self: flex-start;
+  }
+
+
+  .house-create__title {
+    align-self: center;
+    margin: auto;
+  }
+
+  .house-create__form {
+    max-width: 350px;
+  }
+  .house-create__post {
+    max-width: none;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+$breakpoint2: 400px;
+@media (max-width: $breakpoint2) {
+  .house-create {
+    width: 100%;
+    align-items: center;
+  }
+}
+
 
 </style>
