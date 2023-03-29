@@ -4,6 +4,7 @@
 
 <template>
   <div class="about">
+    <p class="about__mobile-title">About</p>
     <h1 class="about__title">About DTT real estate</h1>
     <p class="about__paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -37,6 +38,10 @@
   color: color.$secondary-text-color;
   max-width: 80%;
   padding-bottom: 40px;
+
+  &__mobile-title {
+    display: none;
+  }
 
   &__title {
     font-size: 32px;
@@ -75,6 +80,36 @@
 
   &__link-title {
     color: color.$secondary-text-color;
+  }
+}
+
+
+$breakpoint: 768px;
+
+@media (max-width: $breakpoint) {
+  .about {
+    margin: auto;
+
+    &__mobile-title {
+      display: flex;
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      align-self: center;
+    }
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__paragraph {
+      font-size: 14px;
+    }
+
+    &__logo {
+      width: 100px;
+    }
+
   }
 }
 </style>
