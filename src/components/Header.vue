@@ -30,7 +30,9 @@
 @use "@/assets/_colors.scss" as color;
 
 .header {
+  min-height: 70px;
   background-color: white;
+  display: flex;
 
   &__container {
     width: 80%;
