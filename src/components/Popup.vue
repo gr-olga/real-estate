@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { store } from "@/store";
-import { deleteHouse, getHouses } from "@/services/HouseService";
+import {store} from "@/store";
+import {deleteHouse, getHouses} from "@/services/HouseService";
 import router from "@/router";
 
 async function handleDelete(): Promise<void> {

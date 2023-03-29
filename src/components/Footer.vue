@@ -2,15 +2,15 @@
   <footer class="footer">
     <div class="footer__container">
       <RouterLink
-        class="footer__links-item"
-        to="/"
-        exact
-        active-class="current-home"
+          class="footer__links-item"
+          to="/"
+          exact
+          active-class="current-home"
       >
-        <button class="footer__img-home" />
+        <button class="footer__img-home"/>
       </RouterLink>
       <RouterLink class="footer__links-item" to="/about" active-class="current">
-        <button class="footer__img" />
+        <button class="footer__img"/>
       </RouterLink>
     </div>
   </footer>

@@ -42,7 +42,7 @@ const sortHouses = computed(() => {
             class="overview__img"
             src="@/assets/images/ic_plus_white@3x.png"
           />
-          <h3 class="overview__create-btn-text">Create new</h3>
+          <span class="overview__create-btn-text">Create new</span>
         </button>
         <button class="overview__create-btn-mobile" type="button">
           <img
@@ -186,7 +186,7 @@ const sortHouses = computed(() => {
   &__img {
     width: 15px;
     height: 15px;
-    margin-right: 5px;
+    margin-right: 10px;
   }
 
   &__items-box {
