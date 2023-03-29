@@ -80,8 +80,11 @@ const sortHouses = computed(() => {
       </div>
     </div>
     <div class="overview__items-box">
-      <Empty v-if="sortHouses.length === 0" />
-      <Item v-for="house in sortHouses" :key="house.id" :house="house" />
+      <Empty v-if="sortHouses.length === 0"/>
+      <div class="overview__results-counter" v-if="searchInput.length > 0 && sortHouses.length !== 0">
+        {{ sortHouses.length }} results found
+      </div>
+      <Item v-for="house in sortHouses" :key="house.id" :house="house"/>
     </div>
   </div>
 </template>
@@ -96,6 +99,13 @@ const sortHouses = computed(() => {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+
+  &__results-counter {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 
   &__title {
     font-size: 32px;
