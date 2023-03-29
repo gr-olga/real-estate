@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import Item from "@/components/Item.vue";
-import { computed } from "vue";
+import type {ComputedRef} from "vue";
+import {computed} from "vue";
 import router from "@/router";
-import { useRoute } from "vue-router";
-import { store } from "@/store";
-import { isMyItem } from "@/utils/utils";
-import type { ComputedRef } from "vue";
-import type { HouseType } from "@/models/HouseType";
+import {useRoute} from "vue-router";
+import {store} from "@/store";
+import {isMyItem} from "@/utils/utils";
+import type {HouseType} from "@/models/HouseType";
 
 const route = useRoute();
 
 const house: ComputedRef<HouseType> = computed(
-  () =>
-    store.state.houses.find(
-      (house) => String(house.id) === String(route.params.houseId)
-    ) as HouseType
+    () =>
+        store.state.houses.find(
+            (house) => String(house.id) === String(route.params.houseId)
+        ) as HouseType
 );
 
 function goToEdit(id: number): void {
@@ -31,18 +31,18 @@ function handleOpen(id: number): void {
   <div v-if="house" class="house-details">
     <RouterLink class="house-details__back" to="/">
       <img
-        src="@/assets/images/ic_back_grey@3x.png"
-        alt="back arrow"
-        class="house-details__icon -back"
+          src="@/assets/images/ic_back_grey@3x.png"
+          alt="back arrow"
+          class="house-details__icon -back"
       />
       <h4 class="house-create__back-title">Back to overview</h4>
     </RouterLink>
     <div class="house-details__all">
       <div class="house-details__item">
         <img
-          class="house-details__item-image"
-          src="@/assets/images/img_placeholder_house@3x.png"
-          alt="house"
+            class="house-details__item-image"
+            src="@/assets/images/img_placeholder_house@3x.png"
+            alt="house"
         />
         <div class="house-details__info">
           <div class="house-details__address-line">
@@ -51,34 +51,34 @@ function handleOpen(id: number): void {
             </h1>
             <div v-if="isMyItem(house.id)" class="house-details__actions">
               <button
-                class="item__action -edit"
-                type="button"
-                @click="goToEdit(house.id)"
+                  class="item__action -edit"
+                  type="button"
+                  @click="goToEdit(house.id)"
               >
                 <img
-                  class="item__action-icon"
-                  src="@/assets/images/ic_edit@3x.png"
-                  alt="edit"
+                    class="item__action-icon"
+                    src="@/assets/images/ic_edit@3x.png"
+                    alt="edit"
                 />
               </button>
               <button
-                class="item__action -remove"
-                type="button"
-                @click="handleOpen(house.id)"
+                  class="item__action -remove"
+                  type="button"
+                  @click="handleOpen(house.id)"
               >
                 <img
-                  class="item__action-icon"
-                  src="@/assets/images/ic_delete@3x.png"
-                  alt="delete"
+                    class="item__action-icon"
+                    src="@/assets/images/ic_delete@3x.png"
+                    alt="delete"
                 />
               </button>
             </div>
           </div>
           <div class="house-details__block">
             <img
-              class="house-details__icon"
-              src="@/assets/images/ic_location@3x.png"
-              alt="location"
+                class="house-details__icon"
+                src="@/assets/images/ic_location@3x.png"
+                alt="location"
             />
             <h5 class="house-details__block-text">
               {{ house.location.zip }} {{ house.location.city }}
@@ -87,25 +87,25 @@ function handleOpen(id: number): void {
           <div class="house-details__block">
             <div class="house-details__block">
               <img
-                class="house-details__icon"
-                src="@/assets/images/ic_price@3x.png"
-                alt="price"
+                  class="house-details__icon"
+                  src="@/assets/images/ic_price@3x.png"
+                  alt="price"
               />
               <h5 class="house-details__block-text">{{ house.price }}</h5>
             </div>
             <div class="house-details__block">
               <img
-                class="house-details__icon -inside"
-                src="@/assets/images/ic_size@3x.png"
-                alt="price"
+                  class="house-details__icon -inside"
+                  src="@/assets/images/ic_size@3x.png"
+                  alt="price"
               />
               <h5 class="house-details__block-text">{{ house.size }}</h5>
             </div>
             <div class="house-details__block">
               <img
-                class="house-details__icon -inside"
-                src="@/assets/images/ic_construction_date@3x.png"
-                alt="price"
+                  class="house-details__icon -inside"
+                  src="@/assets/images/ic_construction_date@3x.png"
+                  alt="price"
               />
               <h5 class="house-details__block-text">
                 Build in {{ house.constructionYear }}
@@ -115,9 +115,9 @@ function handleOpen(id: number): void {
           <div class="house-details__block">
             <div class="house-details__block">
               <img
-                class="house-details__icon"
-                src="@/assets/images/ic_bed@3x.png"
-                alt="price"
+                  class="house-details__icon"
+                  src="@/assets/images/ic_bed@3x.png"
+                  alt="price"
               />
               <h5 class="house-details__block-text">
                 {{ house.rooms.bedrooms }}
@@ -125,9 +125,9 @@ function handleOpen(id: number): void {
             </div>
             <div class="house-details__block">
               <img
-                class="house-details__icon -inside"
-                src="@/assets/images/ic_bath@3x.png"
-                alt="price"
+                  class="house-details__icon -inside"
+                  src="@/assets/images/ic_bath@3x.png"
+                  alt="price"
               />
               <h5 class="house-details__block-text">
                 {{ house.rooms.bathrooms }}
@@ -135,9 +135,9 @@ function handleOpen(id: number): void {
             </div>
             <div class="house-details__block">
               <img
-                class="house-details__icon -inside"
-                src="@/assets/images/ic_garage@3x.png"
-                alt="price"
+                  class="house-details__icon -inside"
+                  src="@/assets/images/ic_garage@3x.png"
+                  alt="price"
               />
               <h5 v-if="house.hasGarage" class="house-details__block-text">
                 Yes
@@ -160,9 +160,9 @@ function handleOpen(id: number): void {
       <div class="house-details__list">
         <h3 class="house-details__list-title">Recommended for you</h3>
         <Item
-          v-for="house in store.state.houses"
-          :key="house.id"
-          :house="house"
+            v-for="house in store.state.houses"
+            :key="house.id"
+            :house="house"
         />
       </div>
     </div>

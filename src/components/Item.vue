@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type {HouseType} from "@/models/HouseType";
+import type { HouseType } from "@/models/HouseType";
 import router from "@/router";
-import {store} from "@/store";
-import {isMyItem} from "@/utils/utils";
+import { store } from "@/store";
+import { isMyItem } from "@/utils/utils";
 
 defineProps<{
   house: HouseType;
@@ -27,9 +27,9 @@ function handleOpen(id: number): void {
     <div class="item__details">
       <button @click="goToDetails(house.id)" class="item__detail-link">
         <img
-            class="item__details-img"
-            src="@/assets/images/img_placeholder_house@3x.png"
-            alt="house"
+          class="item__details-img"
+          src="@/assets/images/img_placeholder_house@3x.png"
+          alt="house"
         />
       </button>
       <div class="item__details-info">
@@ -41,25 +41,25 @@ function handleOpen(id: number): void {
         <div class="item__details-box">
           <div class="item__detail-box-item">
             <img
-                class="item__details-icon"
-                src="@/assets/images/ic_bed@3x.png"
-                alt="bed"
+              class="item__details-icon"
+              src="@/assets/images/ic_bed@3x.png"
+              alt="bed"
             />
             <div>{{ house.rooms.bedrooms }}</div>
           </div>
           <div class="item__detail-box-item">
             <img
-                class="item__details-icon"
-                src="@/assets/images/ic_bath@3x.png"
-                alt="bed"
+              class="item__details-icon"
+              src="@/assets/images/ic_bath@3x.png"
+              alt="bed"
             />
             <div>{{ house.rooms.bathrooms }}</div>
           </div>
           <div class="item__detail-box-item">
             <img
-                class="item__details-icon"
-                src="@/assets/images/ic_size@3x.png"
-                alt="bed"
+              class="item__details-icon"
+              src="@/assets/images/ic_size@3x.png"
+              alt="bed"
             />
             <div>{{ house.size }}</div>
           </div>
@@ -68,25 +68,25 @@ function handleOpen(id: number): void {
     </div>
     <div class="item__actions" v-if="isMyItem(house.id)">
       <button
-          @click="goToEdit(house.id)"
-          class="item__action -edit"
-          type="button"
+        @click="goToEdit(house.id)"
+        class="item__action -edit"
+        type="button"
       >
         <img
-            class="item__action-icon"
-            src="@/assets/images/ic_edit@3x.png"
-            alt="edit"
+          class="item__action-icon"
+          src="@/assets/images/ic_edit@3x.png"
+          alt="edit"
         />
       </button>
       <button
-          class="item__action -remove"
-          type="button"
-          @click="handleOpen(house.id)"
+        class="item__action -remove"
+        type="button"
+        @click="handleOpen(house.id)"
       >
         <img
-            class="item__action-icon"
-            src="@/assets/images/ic_delete@3x.png"
-            alt="bin"
+          class="item__action-icon"
+          src="@/assets/images/ic_delete@3x.png"
+          alt="bin"
         />
       </button>
     </div>

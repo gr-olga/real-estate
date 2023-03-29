@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Item from "@/components/Item.vue";
-import { computed, reactive, ref } from "vue";
-import type { HouseType } from "@/models/HouseType";
-import { store } from "@/store";
+import {computed, reactive, ref} from "vue";
+import type {HouseType} from "@/models/HouseType";
+import {store} from "@/store";
 import Empty from "@/components/Empty.vue";
 
 let searchInput = ref("");
@@ -16,17 +16,17 @@ const state: OverviewState = reactive({
 });
 
 const filteredHouses = computed(() => {
-  return [...store.state.houses].filter(({ location }: HouseType) => {
+  return [...store.state.houses].filter(({location}: HouseType) => {
     const searchBy =
-      `${location.street} ${location.city} ${location.zip}`.toLowerCase();
+        `${location.street} ${location.city} ${location.zip}`.toLowerCase();
     return searchBy.includes(searchInput.value.toLowerCase());
   });
 });
 
 const sortHouses = computed(() => {
   return [...filteredHouses.value].sort(
-    (a: HouseType, b: HouseType) =>
-      (a as any)[state.sortBy] - (b as any)[state.sortBy]
+      (a: HouseType, b: HouseType) =>
+          (a as any)[state.sortBy] - (b as any)[state.sortBy]
   );
 });
 </script>
@@ -38,42 +38,42 @@ const sortHouses = computed(() => {
       <RouterLink class="overview__create-btn" to="/house-create">
         <button class="overview__create-btn-normal" type="button">
           <img
-            alt="add icon"
-            class="overview__img"
-            src="@/assets/images/ic_plus_white@3x.png"
+              alt="add icon"
+              class="overview__img"
+              src="@/assets/images/ic_plus_white@3x.png"
           />
           <span class="overview__create-btn-text">Create new</span>
         </button>
         <button class="overview__create-btn-mobile" type="button">
           <img
-            alt="add icon"
-            class="overview__img"
-            src="@/assets/images/ic_plus_grey@3x.png"
+              alt="add icon"
+              class="overview__img"
+              src="@/assets/images/ic_plus_grey@3x.png"
           />
         </button>
       </RouterLink>
     </div>
     <div class="overview__line line-search">
       <input
-        v-model="searchInput"
-        class="overview__search"
-        placeholder="Search for a house"
-        type="search"
+          v-model="searchInput"
+          class="overview__search"
+          placeholder="Search for a house"
+          type="search"
       />
       <div class="overview__sort">
         <button
-          :class="{ '-active': state.sortBy === 'price' }"
-          class="overview__sort-btn"
-          type="button"
-          @click="state.sortBy = 'price'"
+            :class="{ '-active': state.sortBy === 'price' }"
+            class="overview__sort-btn"
+            type="button"
+            @click="state.sortBy = 'price'"
         >
           Price
         </button>
         <button
-          :class="{ '-active': state.sortBy === 'size' }"
-          class="overview__sort-btn"
-          type="button"
-          @click="state.sortBy = 'size'"
+            :class="{ '-active': state.sortBy === 'size' }"
+            class="overview__sort-btn"
+            type="button"
+            @click="state.sortBy = 'size'"
         >
           Size
         </button>
